@@ -60,16 +60,20 @@ class DatabaseSeeder extends Seeder
         );
         Kategori::create(
             [
-                'nama_kategori' => 'Pelaku Bisnis'
+                'nama_kategori' => 'Pelaku Bisnis',
+                'icon' => 'fas fa-user'
             ],
             [
-                'nama_kategori' => 'Komunitas Bisnis'
+                'nama_kategori' => 'Komunitas Bisnis',
+                'icon' => 'fas fa-users'
             ],
             [
-                'nama_kategori' => 'Usaha / Bisnis'
+                'nama_kategori' => 'Usaha / Bisnis',
+                'icon' => 'fas fa-store-alt'
             ],
             [
-                'nama_kategori' => 'Lembaga Pendidikan'
+                'nama_kategori' => 'Lembaga Pendidikan',
+                'icon' => 'fas fa-school'
             ]
         );
     }
