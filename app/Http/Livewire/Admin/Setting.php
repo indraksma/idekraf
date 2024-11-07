@@ -4,19 +4,78 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\JenisUsaha;
 use App\Models\Kategori;
+use App\Models\Setting as ModelsSetting;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use Storage;
 
 class Setting extends Component
 {
-    use LivewireAlert;
+    use LivewireAlert, WithFileUploads;
     protected $listeners = ['refresh' => '$refresh', 'editKategori' => 'editKategori', 'editJenis' => 'editJenis', 'deleteId' => 'deleteId'];
     public $kategoriMode, $jenisMode, $icon, $kategori, $jenis_usaha, $modalTitle, $kategori_id, $jenis_usaha_id, $delete_id;
+    public $slider1, $slider2, $slider3, $tabActive;
+
+    public function mount()
+    {
+        $this->tabActive = 1;
+    }
 
     public function render()
     {
-        return view('livewire.admin.setting')->extends('layouts.app');
+        $slide1 = ModelsSetting::where('name', 'slider_1')->first();
+        $slide2 = ModelsSetting::where('name', 'slider_2')->first();
+        $slide3 = ModelsSetting::where('name', 'slider_3')->first();
+        return view('livewire.admin.setting', compact(['slide1', 'slide2', 'slide3']))->extends('layouts.app');
+    }
+
+    public function changeTab($num)
+    {
+        $this->tabActive = $num;
+    }
+
+    public function updatedSlider1()
+    {
+        $this->validate([
+            'slider1' => 'required|image|max:2048',
+        ]);
+        $filename = 'slider1.' . $this->slider1->extension();
+        if (Storage::disk('local')->exists('img/' . $filename)) {
+            Storage::disk('local')->delete('img/' . $filename);
+        }
+        $this->slider1->storeAs('img', $filename);
+        $slider = ModelsSetting::where('name', 'slider_1')->first();
+        $slider->update(['value' => $filename]);
+        $this->alert('success', 'Gambar berhasil diperbarui!');
+    }
+    public function updatedSlider2()
+    {
+        $this->validate([
+            'slider2' => 'required|image|max:2048',
+        ]);
+        $filename = 'slider2.' . $this->slider2->extension();
+        if (Storage::disk('local')->exists('img/' . $filename)) {
+            Storage::disk('local')->delete('img/' . $filename);
+        }
+        $this->slider2->storeAs('img', $filename);
+        $slider = ModelsSetting::where('name', 'slider_2')->first();
+        $slider->update(['value' => $filename]);
+        $this->alert('success', 'Gambar berhasil diperbarui!');
+    }
+    public function updatedSlider3()
+    {
+        $this->validate([
+            'slider3' => 'required|image|max:2048',
+        ]);
+        $filename = 'slider3.' . $this->slider3->extension();
+        if (Storage::disk('local')->exists('img/' . $filename)) {
+            Storage::disk('local')->delete('img/' . $filename);
+        }
+        $this->slider3->storeAs('img', $filename);
+        $slider = ModelsSetting::where('name', 'slider_3')->first();
+        $slider->update(['value' => $filename]);
+        $this->alert('success', 'Gambar berhasil diperbarui!');
     }
 
     public function addKategori()

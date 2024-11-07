@@ -25,9 +25,12 @@
             <div class="row justify-content-center">
                 <div class="col-md-10 mt-4">
                     <div class="slick-slider">
-                        <div><img src="{{ asset('img/idekraf-banner.jpg') }}" class="img-fluid img-rounded w-100"></div>
-                        <div><img src="{{ asset('img/idekraf-banner-2.jpg') }}" class="img-fluid img-rounded w-100">
-                        </div>
+                        <div><img src="{{ asset('storage/img/' . $slide1->value) }}"
+                                class="img-fluid img-rounded w-100"></div>
+                        <div><img src="{{ asset('storage/img/' . $slide2->value) }}"
+                                class="img-fluid img-rounded w-100"></div>
+                        <div><img src="{{ asset('storage/img/' . $slide3->value) }}"
+                                class="img-fluid img-rounded w-100"></div>
                     </div>
                 </div>
                 <div class="col-md-10 mb-4">

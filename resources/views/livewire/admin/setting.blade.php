@@ -33,41 +33,77 @@
 @endpush
 <div>
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card card-teal card-outline">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                            <h4 class="card-title">Kategori Usaha</h4>
-                        </div>
-                        <div class="col-6 text-right">
-                            <button class="btn btn-sm btn-success" wire:click="addKategori" data-target="#modalSetting"
-                                data-toggle="modal">Tambah
-                                Kategori</button>
-                        </div>
-                    </div>
+                <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link @if ($tabActive == 1) active @endif"
+                                href="#kategori" data-toggle="tab" wire:click.prevent="changeTab('1')">Kategori
+                                Usaha</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link @if ($tabActive == 2) active @endif"
+                                href="#jenis" data-toggle="tab" wire:click.prevent="changeTab('2')">Jenis Usaha</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link @if ($tabActive == 3) active @endif"
+                                href="#slider" data-toggle="tab" wire:click.prevent="changeTab('3')">Gambar Slider</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="card-body table-responsive p-0">
-                    <livewire:admin.kategori />
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card card-teal card-outline">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                            <h4 class="card-title">Jenis Usaha</h4>
+                <div class="card-body p-0">
+                    <div class="tab-content">
+                        <div class="tab-pane @if ($tabActive == 1) active @endif" id="kategori">
+                            {{-- <button class="btn btn-sm btn-success m-2" wire:click="addKategori"
+                                data-target="#modalSetting" data-toggle="modal"><i class="fas fa-plus"></i>&nbsp;Tambah
+                                Kategori</button> --}}
+                            <livewire:admin.kategori />
                         </div>
-                        <div class="col-6 text-right">
-                            <button class="btn btn-sm btn-success" wire:click="addJenis" data-target="#modalSetting"
-                                data-toggle="modal">Tambah
+                        <div class="tab-pane @if ($tabActive == 2) active @endif" id="jenis">
+                            <button class="btn btn-sm btn-success m-2" wire:click="addJenis" data-target="#modalSetting"
+                                data-toggle="modal"><i class="fas fa-plus"></i>&nbsp;Tambah
                                 Jenis Usaha</button>
+                            <livewire:admin.jenis-usaha />
+                        </div>
+                        <div class="tab-pane @if ($tabActive == 3) active @endif" id="slider">
+                            <div class="p-4">
+                                <div class="alert alert-info">Gambar Slider Harus Memiliki Resolusi / Rasio yang Sama.
+                                    Direkomendasikan menggunakan resolusi 800 x 350 pixel. Ukuran maksimal yang
+                                    diperbolehkan yaitu 2MB.
+                                </div>
+                                <form method="POST" wire:submit.prevent="storeSlider()">
+                                    <div class="form-group">
+                                        <label for="slider1">Slide 1</label>
+                                        @if ($slide1)
+                                            <img src="{{ asset('storage/img/' . $slide1->value) }}"
+                                                class="img-fluid pb-2 d-block" style="max-width: 20vw;" />
+                                        @endif
+                                        <input wire:model="slider1" type="file" class="form-control"
+                                            id="slider1" />
+                                        <div wire:loading wire:target="slider1">Uploading...</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="slider2">Slide 2</label>
+                                        @if ($slide2)
+                                            <img src="{{ asset('storage/img/' . $slide2->value) }}"
+                                                class="img-fluid pb-2 d-block" style="max-width: 20vw;" />
+                                        @endif
+                                        <input wire:model="slider2" type="file" class="form-control"
+                                            id="slider2" />
+                                        <div wire:loading wire:target="slider2">Uploading...</div>
+                                    </div>
+                                    <div class="form-group">
+                                        @if ($slide3->value)
+                                            <img src="{{ asset('storage/img/' . $slide3->value) }}"
+                                                class="img-fluid pb-2 d-block" style="max-width: 20vw;" />
+                                        @endif
+                                        <label for="slider3">Slide 3</label>
+                                        <input wire:model="slider3" type="file" class="form-control"
+                                            id="slider3" />
+                                        <div wire:loading wire:target="slider3">Uploading...</div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body table-responsive p-0">
-                    <livewire:admin.jenis-usaha />
                 </div>
             </div>
         </div>
@@ -94,8 +130,8 @@
                         @if (isset($jenisMode) && $jenisMode == true)
                             <div class="form-group">
                                 <label for="jenisUsaha">Jenis Usaha</label>
-                                <input wire:model.lazy="jenis_usaha" type="text" class="form-control" id="jenisUsaha"
-                                    placeholder="Jenis Usaha" required>
+                                <input wire:model.lazy="jenis_usaha" type="text" class="form-control"
+                                    id="jenisUsaha" placeholder="Jenis Usaha" required>
                             </div>
                         @endif
                         <div class="form-group">

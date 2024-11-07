@@ -8,6 +8,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
+use Storage;
 
 class Produk extends Component
 {
@@ -82,6 +83,12 @@ class Produk extends Component
     public function store()
     {
         if ($this->foto_produk != NULL) {
+            if ($this->editMode === TRUE) {
+                $produk = ModelsProduk::find($this->produk_id);
+                if (Storage::disk('local')->exists('img/' . $produk->foto)) {
+                    Storage::disk('local')->delete('img/' . $produk->foto);
+                }
+            }
             $this->validate([
                 'foto_produk' => 'required|image|max:1024',
             ]);

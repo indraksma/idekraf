@@ -17,9 +17,9 @@
                             <button type="button" wire:click="$emit('editKategori',{{ $dkat->id }})"
                                 data-toggle="modal" data-target="#modalSetting"
                                 class="btn btn-xs btn-warning">Ubah</button>
-                            <button type="button" wire:click="$emit('deleteId',{{ $dkat->id }}, 1)"
+                            {{-- <button type="button" wire:click="$emit('deleteId',{{ $dkat->id }}, 1)"
                                 data-toggle="modal" data-target="#deleteModal"
-                                class="btn btn-xs btn-danger">Hapus</button>
+                                class="btn btn-xs btn-danger">Hapus</button> --}}
                         </td>
                     </tr>
                 @endforeach
@@ -30,7 +30,4 @@
             @endif
         </tbody>
     </table>
-    <div class="dataTables_paginate paging_simple_numbers ml-4">
-        {{ $kategoris->links() }}
-    </div>
 </div>

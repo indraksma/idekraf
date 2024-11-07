@@ -12,6 +12,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
+use Storage;
 
 class Usaha extends Component
 {
@@ -160,6 +161,10 @@ class Usaha extends Component
                 ]);
                 $filename = md5($this->logo . microtime()) . '.' . $this->logo->extension();
                 $this->logo->storeAs('img', $filename);
+                if (Storage::disk('local')->exists('img/' . $ekraf->logo)) {
+                    $this->alert('success', 'Ada filenya lho');
+                    Storage::disk('local')->delete('img/' . $ekraf->logo);
+                }
             } else {
                 $filename = $ekraf->logo;
             }

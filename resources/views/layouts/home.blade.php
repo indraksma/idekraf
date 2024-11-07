@@ -38,7 +38,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <nav class="main-header navbar navbar-expand-md sticky-top navbar-light navbar-teal">
             <div class="container">
                 <a href="{{ route('home') }}" class="navbar-brand">
-                    <img src="{{ asset('logo_mini.png') }}" alt="IDEKRAF Logo" class="brand-image" style="opacity: .8">
+                    <img src="{{ asset('logo_idekraf.png') }}" alt="IDEKRAF Logo" class="brand-image"
+                        style="opacity: .8">
                     <span class="brand-text text-white font-weight-bold">IDEKRAF</span>
                 </a>
 
