@@ -18,10 +18,12 @@ namespace App\Models{
  * @property int $id
  * @property string $jenis_usaha
  * @property string|null $icon
+ * @property int|null $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Usaha> $usaha
  * @property-read int|null $usaha_count
+ * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha query()
@@ -30,6 +32,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha whereJenisUsaha($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha whereUserId($value)
  */
 	class JenisUsaha extends \Eloquent {}
 }
@@ -55,6 +58,29 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Kategori whereUpdatedAt($value)
  */
 	class Kategori extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Kriteria
+ *
+ * @property int $id
+ * @property string $name
+ * @property int|null $min
+ * @property int|null $max
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Kriteria newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Kriteria newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Kriteria query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Kriteria whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Kriteria whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Kriteria whereMax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Kriteria whereMin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Kriteria whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Kriteria whereUpdatedAt($value)
+ */
+	class Kriteria extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -95,7 +121,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
- * @property string $value
+ * @property string|null $value
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
@@ -125,6 +151,8 @@ namespace App\Models{
  * @property string|null $link_maps
  * @property string|null $logo
  * @property int $isVerified
+ * @property int|null $modal_usaha
+ * @property int|null $jumlah_pekerja
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\JenisUsaha|null $jenis_usaha
@@ -141,9 +169,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereIsVerified($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereJenisUsahaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereJumlahPekerja($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereKategoriId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereLinkMaps($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereModalUsaha($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereNamaUsaha($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereUserId($value)

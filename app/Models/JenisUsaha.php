@@ -14,4 +14,9 @@ class JenisUsaha extends Model
     {
         return $this->hasMany(Usaha::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

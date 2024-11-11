@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Kriteria;
 use App\Models\Usaha;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -11,6 +12,7 @@ class VerUsaha extends Component
     use LivewireAlert;
     protected $listeners = ['refresh' => '$refresh'];
     public $usaha_id, $delete_id, $nama_usaha, $nama_kategori, $nama_jenis, $name, $no_hp, $email, $website, $link_maps, $alamat, $deskripsi, $filelogo;
+    public $instagram, $tiktok, $facebook, $twitter, $shopee, $tokopedia, $kriteria, $jumlah_pekerja, $whatsapp, $youtube;
     public $detailMode = false;
 
     public function render()
@@ -23,6 +25,7 @@ class VerUsaha extends Component
     {
         $this->detailMode = false;
         $this->reset(['usaha_id', 'delete_id', 'nama_usaha', 'nama_kategori', 'nama_jenis', 'name', 'no_hp', 'email', 'website', 'link_maps', 'alamat', 'deskripsi', 'filelogo']);
+        $this->reset(['instagram', 'facebook', 'twitter', 'tiktok', 'shopee', 'tokopedia', 'jumlah_pekerja', 'whatsapp', 'youtube']);
     }
 
     public function detailUsaha($id)
@@ -40,6 +43,21 @@ class VerUsaha extends Component
         $this->name = $ekraf->user->name;
         $this->no_hp = $ekraf->user->no_hp;
         $this->email = $ekraf->user->email;
+        $this->instagram = $ekraf->instagram;
+        $this->tiktok = $ekraf->tiktok;
+        $this->facebook = $ekraf->facebook;
+        $this->twitter = $ekraf->twitter;
+        $this->shopee = $ekraf->shopee;
+        $this->tokopedia = $ekraf->tokopedia;
+        $this->jumlah_pekerja = $ekraf->jumlah_pekerja;
+        $kriteria = Kriteria::find($ekraf->kriteria_id);
+        if ($kriteria) {
+            $this->kriteria = $kriteria->name;
+        } else {
+            $this->kriteria = NULL;
+        }
+        $this->whatsapp = $ekraf->whatsapp;
+        $this->youtube = $ekraf->youtube;
     }
 
     public function verifikasi($id)

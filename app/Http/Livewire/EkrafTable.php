@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\JenisUsaha;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Usaha;
+use Auth;
 
 class EkrafTable extends DataTableComponent
 {
@@ -20,8 +22,18 @@ class EkrafTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return Usaha::query()
-            ->where('isVerified', 1);
+        if (Auth::user()->hasRole('opd')) {
+            $jenisusaha = JenisUsaha::where('user_id', Auth::user()->id)->get();
+            $juid = [];
+            foreach ($jenisusaha as $ju) {
+                array_push($juid, $ju->id);
+            }
+            return Usaha::query()
+                ->where('isVerified', 1)->whereIn('jenis_usaha_id', $juid);
+        } else {
+            return Usaha::query()
+                ->where('isVerified', 1);
+        }
     }
 
     public function columns(): array

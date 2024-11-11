@@ -44,11 +44,13 @@
                                             <button class="btn btn-xs btn-primary"
                                                 wire:click="detailUsaha({{ $dt->id }})" data-toggle="modal"
                                                 data-target="#detailModal">Detail</button>&nbsp;
-                                            <button class="btn btn-xs btn-info"
-                                                wire:click="verifikasi({{ $dt->id }})">Verifikasi</button>&nbsp;
-                                            <button class="btn btn-xs btn-danger"
-                                                wire:click="deleteId({{ $dt->id }})" data-toggle="modal"
-                                                data-target="#deleteModal">Hapus</button>
+                                            @if (Auth::user()->hasRole('admin') || Auth::user()->id == $dt->jenis_usaha->user_id)
+                                                <button class="btn btn-xs btn-info"
+                                                    wire:click="verifikasi({{ $dt->id }})">Verifikasi</button>&nbsp;
+                                                <button class="btn btn-xs btn-danger"
+                                                    wire:click="deleteId({{ $dt->id }})" data-toggle="modal"
+                                                    data-target="#deleteModal">Hapus</button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -66,7 +68,7 @@
 
     <!-- Modal Detail -->
     <div wire:ignore.self class="modal fade" data-backdrop="static" id="detailModal">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="detailModalLabel">Detail Ekraf</h5>
@@ -77,45 +79,151 @@
                 </div>
                 <div class="modal-body">
                     @if ($detailMode)
-                        <div class="text-center">
-                            <img class="profile-user-img img-fluid" src="{{ asset('storage/img/' . $filelogo) }}"
-                                alt="User profile picture">
+                        <div class="text-center  mb-2">
+                            @if ($filelogo != null)
+                                <img class="profile-user-img img-fluid" src="{{ asset('storage/img/' . $filelogo) }}"
+                                    alt="User profile picture">
+                            @else
+                                <img class="profile-user-img img-fluid" src="{{ asset('img/default_store.png') }}"
+                                    alt="User profile picture">
+                            @endif
                         </div>
-                        <strong>Nama Usaha</strong>
-                        <p class="text-muted mb-0">{{ $nama_usaha }}</p>
-                        <hr class="mb-1 mt-1">
-                        <strong>Nama Pemilik</strong>
-                        <p class="text-muted mb-0">{{ $name }}</p>
-                        <hr class="mb-1 mt-1">
-                        <strong>Kategori</strong>
-                        <p class="text-muted mb-0">{{ $nama_kategori }}</p>
-                        <hr class="mb-1 mt-1">
-                        <strong>Jenis Usaha</strong>
-                        <p class="text-muted mb-0">{{ $nama_jenis }}</p>
-                        <hr class="mb-1 mt-1">
-                        <strong>Nomor HP</strong>
-                        <p class="text-muted mb-0">{{ $no_hp }}</p>
-                        <hr class="mb-1 mt-1">
-                        <strong>Email</strong>
-                        <p class="text-muted mb-0">{{ $email }}</p>
-                        <hr class="mb-1 mt-1">
-                        <strong>Website</strong>
-                        <p class="text-muted mb-0">
-                            {{ $website }}
-                            <a class="ml-2 btn btn-xs btn-info" href="{{ $website }}">Buka</a>
-                        </p>
-                        <hr class="mb-1 mt-1">
-                        <strong>Alamat</strong>
-                        <p class="text-muted mb-0">{{ $alamat }}</p>
-                        <hr class="mb-1 mt-1">
-                        <strong>Link Maps</strong>
-                        <p class="text-muted mb-0">
-                            {{ $link_maps }}
-                            <a class="ml-2 btn btn-xs btn-info" href="{{ $link_maps }}">Buka</a>
-                        </p>
-                        <hr class="mb-1 mt-1">
-                        <strong>Deskripsi</strong>
-                        <p class="text-muted">{{ $deskripsi }}</p>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <strong>Nama Usaha</strong>
+                                <p class="text-muted mb-0">{{ $nama_usaha }}</p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Kategori</strong>
+                                <p class="text-muted mb-0">{{ $nama_kategori }}</p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Nomor HP</strong>
+                                <p class="text-muted mb-0">{{ $no_hp }}</p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Nomor Whatsapp Usaha</strong>
+                                <p class="text-muted mb-0">
+                                    @if ($whatsapp != null)
+                                        {{ $no_hp }}
+                                    @else
+                                        -
+                                    @endif
+                                </p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Website</strong>
+                                <p class="text-muted mb-0">
+                                    @if ($website != null)
+                                        {{ $website }}
+                                        <a target="_blank" class="ml-2 btn btn-xs btn-info"
+                                            href="{{ $website }}">Buka</a>
+                                    @else
+                                        -
+                                    @endif
+                                </p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Tiktok</strong>
+                                <p class="text-muted mb-0">
+                                    @if ($tiktok != null)
+                                        {{ $tiktok }}
+                                        <a target="_blank" class="ml-2 btn btn-xs btn-info"
+                                            href="{{ $tiktok }}">Buka</a>
+                                    @else
+                                        -
+                                    @endif
+                                </p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Facebook</strong>
+                                <p class="text-muted mb-0">
+                                    @if ($facebook != null)
+                                        {{ $facebook }}
+                                        <a target="_blank" class="ml-2 btn btn-xs btn-info"
+                                            href="{{ $facebook }}">Buka</a>
+                                    @else
+                                        -
+                                    @endif
+                                </p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Shopee</strong>
+                                <p class="text-muted mb-0">
+                                    @if ($shopee != null)
+                                        {{ $shopee }}
+                                        <a target="_blank" class="ml-2 btn btn-xs btn-info"
+                                            href="{{ $shopee }}">Buka</a>
+                                    @else
+                                        -
+                                    @endif
+                                </p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Alamat</strong>
+                                <p class="text-muted mb-0">{{ $alamat }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Nama Pemilik</strong>
+                                <p class="text-muted mb-0">{{ $name }}</p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Jenis Usaha</strong>
+                                <p class="text-muted mb-0">{{ $nama_jenis }}</p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Email</strong>
+                                <p class="text-muted mb-0">{{ $email }}</p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Link Maps</strong>
+                                <p class="text-muted mb-0">
+                                    @if ($link_maps != null)
+                                        {{ $link_maps }}
+                                        <a target="_blank" class="ml-2 btn btn-xs btn-info"
+                                            href="{{ $link_maps }}">Buka</a>
+                                    @else
+                                        -
+                                    @endif
+                                </p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Youtube</strong>
+                                <p class="text-muted mb-0">
+                                    @if ($youtube != null)
+                                        {{ $youtube }}
+                                        <a target="_blank" class="ml-2 btn btn-xs btn-info"
+                                            href="{{ $youtube }}">Buka</a>
+                                    @else
+                                        -
+                                    @endif
+                                </p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Instagram</strong>
+                                <p class="text-muted mb-0">
+                                    @if ($instagram != null)
+                                        {{ $instagram }}
+                                        <a target="_blank" class="ml-2 btn btn-xs btn-info"
+                                            href="{{ $instagram }}">Buka</a>
+                                    @else
+                                        -
+                                    @endif
+                                </p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Twitter / X</strong>
+                                <p class="text-muted mb-0">
+                                    @if ($twitter != null)
+                                        {{ $twitter }}
+                                        <a target="_blank" class="ml-2 btn btn-xs btn-info"
+                                            href="{{ $twitter }}">Buka</a>
+                                    @else
+                                        -
+                                    @endif
+                                </p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Tokopedia</strong>
+                                <p class="text-muted mb-0">
+                                    @if ($tokopedia != null)
+                                        {{ $tokopedia }}
+                                        <a target="_blank" class="ml-2 btn btn-xs btn-info"
+                                            href="{{ $tokopedia }}">Buka</a>
+                                    @else
+                                        -
+                                    @endif
+                                </p>
+                                <hr class="mb-1 mt-1">
+                                <strong>Deskripsi</strong>
+                                <p class="text-muted">{{ $deskripsi }}</p>
+                            </div>
+                        </div>
                         <button wire:click="resetForm" data-dismiss="modal"
                             class="btn btn-secondary btn-block">Tutup</button>
                     @endif

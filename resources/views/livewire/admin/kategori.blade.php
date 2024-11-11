@@ -25,7 +25,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td class="text-center" colspan="2">Belum ada data</td>
+                    <td class="text-center" colspan="3">Belum ada data</td>
                 </tr>
             @endif
         </tbody>

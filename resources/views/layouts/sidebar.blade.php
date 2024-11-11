@@ -23,7 +23,7 @@
                     </a>
                 </li>
 
-                @if (Auth::user()->hasRole('admin'))
+                @if (Auth::user()->hasRole(['admin', 'opd']))
                     <li class="nav-item {{ request()->routeIs(['admin.usaha', 'admin.verusaha']) ? 'menu-open' : '' }}">
                         <a href="#"
                             class="{{ request()->routeIs(['admin.usaha', 'admin.verusaha']) ? 'nav-link active' : 'nav-link' }}">

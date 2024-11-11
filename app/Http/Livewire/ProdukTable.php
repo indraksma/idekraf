@@ -7,6 +7,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Produk;
 use App\Models\Usaha;
+use App\Models\JenisUsaha;
 use Illuminate\Support\Facades\Auth;
 
 class ProdukTable extends DataTableComponent
@@ -26,6 +27,18 @@ class ProdukTable extends DataTableComponent
             $usaha = Usaha::where('user_id', Auth::user()->id)->first();
             return Produk::query()
                 ->where('usaha_id', $usaha->id);
+        } else if (Auth::user()->hasRole('opd')) {
+            $jenisusaha = JenisUsaha::where('user_id', Auth::user()->id)->get();
+            $juid = [];
+            foreach ($jenisusaha as $ju) {
+                array_push($juid, $ju->id);
+            }
+            $usid = [];
+            $usaha = Usaha::whereIn('jenis_usaha_id', $juid)->get();
+            foreach ($usaha as $us) {
+                array_push($usid, $us->id);
+            }
+            return Produk::query()->whereIn('usaha_id', $usid);
         } else {
             return Produk::query();
         }

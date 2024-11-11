@@ -116,7 +116,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="fileProduk">Foto Produk <small>(JEPG/PNG. Max 1MB)</small>
-                                        @if ($editMode === true)
+                                        @if ($editMode === true && $fileProduk != null)
                                             &emsp;
                                             <a target="_blank" class="right btn btn-xs btn-info"
                                                 href="{{ asset('storage/img/' . $fileProduk) }}">Lihat</a>
@@ -193,8 +193,13 @@
                     @if ($detailMode)
                         <div class="row justify-content-center">
                             <div class="col-md-6">
-                                <img class="img-fluid mb-3" src="{{ asset('storage/img/' . $fileProduk) }}"
-                                    alt="User profile picture">
+                                @if ($fileProduk != null)
+                                    <img class="img-fluid mb-3" src="{{ asset('storage/img/' . $fileProduk) }}"
+                                        alt="Product Picture">
+                                @else
+                                    <img class="img-fluid mb-3" src="{{ asset('img/default_product.png') }}"
+                                        alt="Product Picture">
+                                @endif
                             </div>
                         </div>
                         <strong>Nama Produk</strong>

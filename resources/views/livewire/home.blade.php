@@ -20,7 +20,6 @@
 @endpush
 <div>
     <div class="index-top">
-
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10 mt-4">
@@ -107,7 +106,11 @@
                     @foreach ($direktori_baru as $dir)
                         <div class="col-lg-3 col-md-6">
                             <a class="box media" href="{{ url('/ekraf/' . $dir->id) }}">
-                                <img width="64" class="rounded" src="{{ asset('storage/img/' . $dir->logo) }}">
+                                @if ($dir->logo == null)
+                                    <img width="64" class="rounded" src="{{ asset('img/default_store.png') }}">
+                                @else
+                                    <img width="64" class="rounded" src="{{ asset('storage/img/' . $dir->logo) }}">
+                                @endif
                                 <div class="media-box">
                                     <div class="title">{{ $dir->nama_usaha }}</div>
                                     <p>

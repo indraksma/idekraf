@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\JenisUsaha;
 use App\Models\Kategori;
+use App\Models\Kriteria;
+use App\Models\User;
 use App\Models\Setting as ModelsSetting;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -13,13 +15,20 @@ use Storage;
 class Setting extends Component
 {
     use LivewireAlert, WithFileUploads;
-    protected $listeners = ['refresh' => '$refresh', 'editKategori' => 'editKategori', 'editJenis' => 'editJenis', 'deleteId' => 'deleteId'];
+    protected $listeners = ['refresh' => '$refresh', 'editKategori' => 'editKategori', 'editJenis' => 'editJenis', 'deleteId' => 'deleteId', 'editKriteria' => 'editKriteria'];
     public $kategoriMode, $jenisMode, $icon, $kategori, $jenis_usaha, $modalTitle, $kategori_id, $jenis_usaha_id, $delete_id;
     public $slider1, $slider2, $slider3, $tabActive;
+    public $modal_max, $modal_min, $kriteria, $kriteria_id, $kriteriaMode, $user_id, $users;
 
     public function mount()
     {
         $this->tabActive = 1;
+        $this->users = User::whereHas(
+            'roles',
+            function ($q) {
+                $q->where('name', 'opd');
+            }
+        )->get();
     }
 
     public function render()
@@ -82,7 +91,25 @@ class Setting extends Component
     {
         $this->modalTitle = 'Tambah Kategori';
         $this->kategoriMode = TRUE;
-        $this->reset('jenisMode');
+        $this->reset(['jenisMode', 'kriteriaMode']);
+    }
+
+    public function addKriteria()
+    {
+        $this->modalTitle = 'Tambah Kriteria';
+        $this->kriteriaMode = TRUE;
+        $this->reset(['jenisMode', 'kategoriMode']);
+    }
+
+    public function editKriteria($id)
+    {
+        $this->kriteriaMode = TRUE;
+        $this->modalTitle = 'Edit Data Kriteria';
+        $this->kriteria_id = $id;
+        $kriteria = Kriteria::find($id);
+        $this->kriteria = $kriteria->name;
+        $this->modal_min = $kriteria->min;
+        $this->modal_max = $kriteria->max;
     }
 
     public function editKategori($id)
@@ -104,6 +131,7 @@ class Setting extends Component
         $data = JenisUsaha::find($id);
         $this->jenis_usaha_id = $data->id;
         $this->jenis_usaha = $data->jenis_usaha;
+        $this->user_id = $data->user_id;
         $this->icon = $data->icon;
     }
 
@@ -111,7 +139,7 @@ class Setting extends Component
     {
         $this->modalTitle = 'Tambah Jenis Usaha';
         $this->jenisMode = TRUE;
-        $this->reset('kategoriMode');
+        $this->reset(['kategoriMode', 'kriteriaMode']);
     }
 
     public function store()
@@ -125,25 +153,40 @@ class Setting extends Component
         if ($this->jenisMode) {
             $data = JenisUsaha::updateOrCreate(['id' => $this->jenis_usaha_id], [
                 'jenis_usaha' => $this->jenis_usaha,
+                'user_id' => $this->user_id,
                 'icon' => $this->icon,
             ]);
         }
+        if ($this->kriteriaMode) {
+            $data = Kriteria::updateOrCreate(['id' => $this->kriteria_id], [
+                'name' => $this->kriteria,
+                'min' => $this->modal_min,
+                'max' => $this->modal_max,
+            ]);
+        }
 
-        $this->alert('success', ($this->kategori_id || $this->jenis_usaha_id) ? 'Data updated successfully.' : 'Data created successfully.', [
+        $this->alert('success', ($this->kategori_id || $this->jenis_usaha_id || $this->kriteria_id) ? 'Data updated successfully.' : 'Data created successfully.', [
             'position' => 'center',
             'timer' => 3000,
             'toast' => true,
         ]);
 
+        if ($this->kategoriMode || $this->jenisMode) {
+            $this->emit('refreshKategori');
+            $this->emit('refreshJenis');
+            $this->dispatchBrowserEvent('closeModalSetting');
+        } else if ($this->kriteriaMode) {
+            $this->emit('refreshKriteria');
+            $this->dispatchBrowserEvent('closeModalKriteria');
+        }
         $this->resetForm();
-        $this->emit('refreshKategori');
-        $this->emit('refreshJenis');
-        $this->dispatchBrowserEvent('closeModalSetting');
     }
 
     public function resetForm()
     {
         $this->reset(['kategoriMode', 'jenisMode', 'icon', 'kategori', 'jenis_usaha', 'modalTitle', 'kategori_id', 'jenis_usaha_id', 'delete_id']);
+        $this->reset(['kriteria', 'kriteria_id', 'modal_max', 'modal_min', 'kriteriaMode']);
+        $this->user_id = '';
     }
 
     public function deleteId($id, $type)
@@ -153,6 +196,8 @@ class Setting extends Component
             $this->kategoriMode = TRUE;
         } else if ($type == 2) {
             $this->jenisMode = TRUE;
+        } else if ($type == 3) {
+            $this->kriteriaMode = TRUE;
         }
     }
 
@@ -166,15 +211,20 @@ class Setting extends Component
             $data = JenisUsaha::find($this->delete_id);
             $data->delete();
         }
+        if ($this->kriteriaMode) {
+            $data = Kriteria::find($this->delete_id);
+            $data->delete();
+        }
 
         $this->alert('success', 'Data deleted successfully.', [
             'position' => 'center',
             'timer' => 3000,
             'toast' => true,
         ]);
-        $this->resetForm();
         $this->emit('refreshKategori');
         $this->emit('refreshJenis');
+        $this->emit('refreshKriteria');
+        $this->resetForm();
         $this->dispatchBrowserEvent('closeModalDelete');
     }
 }

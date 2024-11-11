@@ -16,11 +16,11 @@ class Home extends Component
         $slide1 = Setting::where('name', 'slider_1')->first();
         $slide2 = Setting::where('name', 'slider_2')->first();
         $slide3 = Setting::where('name', 'slider_3')->first();
-        $kategoris = Kategori::all();
+        $kategoris = Kategori::orderBy('nama_kategori')->get();
         $total_usaha = Usaha::where('isVerified', true)->count();
         $total_produk = Produk::all()->count();
         $jenis_usaha = JenisUsaha::all()->count();
-        $jenis_usahas = JenisUsaha::all();
+        $jenis_usahas = JenisUsaha::orderBy('jenis_usaha')->get();
         $direktori_baru = Usaha::where('isVerified', true)->orderBy('created_at', 'DESC')->limit(4)->get();
         return view('livewire.home', compact(['kategoris', 'total_usaha', 'total_produk', 'jenis_usaha', 'jenis_usahas', 'direktori_baru', 'slide1', 'slide2', 'slide3']))->extends('layouts.home');
     }

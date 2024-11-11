@@ -2,8 +2,9 @@
     <table class="table table-hover text-nowrap">
         <thead>
             <tr>
-                <th class="w-50">Jenis Usaha</th>
-                <th class="w-50">Icon</th>
+                <th>Jenis Usaha</th>
+                <th>Icon</th>
+                <th>Pengampu</th>
                 <th class="text-nowrap">Aksi</th>
             </tr>
         </thead>
@@ -13,6 +14,13 @@
                     <tr>
                         <td>{{ $dju->jenis_usaha }}</td>
                         <td>{{ $dju->icon }}</td>
+                        <td>
+                            @if ($dju->user_id != null)
+                                {{ $dju->user->name }}
+                            @else
+                                -
+                            @endif
+                        </td>
                         <td>
                             <button type="button" wire:click="$emit('editJenis',{{ $dju->id }})" data-toggle="modal"
                                 data-target="#modalSetting" class="btn btn-xs btn-warning">Ubah</button>

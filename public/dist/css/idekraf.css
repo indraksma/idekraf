@@ -97,6 +97,10 @@
             padding: 50px 0px 50px;
         }
 
+        .ekraf-list {
+            padding: 10px 20px 10px;
+        }
+
         .index-main .totals-section {
             padding: 25px 110px;
             background-color: #f9fafc;
@@ -138,6 +142,19 @@
         }
 
         .index-main .index-main-content .head a {
+            font-size: 14px;
+            color: #00983A;
+            float: right;
+            font-weight: bold;
+        }
+
+        .ekraf-list .index-main-content .head {
+            font-size: 24px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .ekraf-list .index-main-content .head a {
             font-size: 14px;
             color: #00983A;
             float: right;
@@ -218,6 +235,44 @@
         }
 
         .index-main .direktori-baru .box p {
+            font-size: 12px;
+            margin-bottom: 0px;
+            color: #808080;
+        }
+
+        .ekraf-list .direktori-baru .box {
+            text-decoration: none;
+            background-color: #fff;
+            padding: 12px;
+            border-radius: 20px;
+        }
+
+        .ekraf-list .direktori-baru .box:hover,
+        .ekraf-list .direktori-baru .box:focus {
+            background-color: #e5f5eb;
+        }
+
+        .ekraf-list .direktori-baru .box:hover .title,
+        .ekraf-list .direktori-baru .box:focus .title {
+            color: #00983A;
+        }
+
+        .ekraf-list .direktori-baru .box img {
+            margin-right: 12px;
+        }
+
+        .ekraf-list .direktori-baru .box .title {
+            color: #333333;
+            height: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: bold;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+        .ekraf-list .direktori-baru .box p {
             font-size: 12px;
             margin-bottom: 0px;
             color: #808080;
@@ -355,6 +410,10 @@
             margin-bottom: 30px;
         }
 
+        .ekraf-list .direktori-baru .box {
+            margin-bottom: 20px;
+        }
+
         .index-main .berita .box {
             margin-bottom: 30px;
         }
@@ -373,6 +432,10 @@
             }
 
             .index-main .direktori-baru .box {
+                margin-bottom: 30px;
+            }
+
+            .ekraf-list .direktori-baru .box {
                 margin-bottom: 30px;
             }
 

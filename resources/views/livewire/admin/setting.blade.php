@@ -26,6 +26,9 @@
         window.addEventListener('closeModalSetting', event => {
             $('#modalSetting').modal('hide');
         });
+        window.addEventListener('closeModalKriteria', event => {
+            $('#modalKriteria').modal('hide');
+        });
         window.addEventListener('closeModalDelete', event => {
             $('#deleteModal').modal('hide');
         });
@@ -43,6 +46,9 @@
                         </li>
                         <li class="nav-item"><a class="nav-link @if ($tabActive == 2) active @endif"
                                 href="#jenis" data-toggle="tab" wire:click.prevent="changeTab('2')">Jenis Usaha</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link @if ($tabActive == 4) active @endif"
+                                href="#kriteria" data-toggle="tab" wire:click.prevent="changeTab('4')">Kriteria UMKM</a>
                         </li>
                         <li class="nav-item"><a class="nav-link @if ($tabActive == 3) active @endif"
                                 href="#slider" data-toggle="tab" wire:click.prevent="changeTab('3')">Gambar Slider</a>
@@ -103,6 +109,12 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="tab-pane @if ($tabActive == 4) active @endif" id="kriteria">
+                            <button class="btn btn-sm btn-success m-2" wire:click="addKriteria"
+                                data-target="#modalKriteria" data-toggle="modal"><i class="fas fa-plus"></i>&nbsp;Tambah
+                                Kriteria UMKM</button>
+                            <livewire:admin.kriteria-umkm />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,8 +135,8 @@
                         @if (isset($kategoriMode) && $kategoriMode == true)
                             <div class="form-group">
                                 <label for="namaKategori">Nama Kategori</label>
-                                <input wire:model.lazy="kategori" type="text" class="form-control" id="namaKategori"
-                                    placeholder="Nama Kategori" required>
+                                <input wire:model.lazy="kategori" type="text" class="form-control"
+                                    id="namaKategori" placeholder="Nama Kategori" required>
                             </div>
                         @endif
                         @if (isset($jenisMode) && $jenisMode == true)
@@ -132,6 +144,17 @@
                                 <label for="jenisUsaha">Jenis Usaha</label>
                                 <input wire:model.lazy="jenis_usaha" type="text" class="form-control"
                                     id="jenisUsaha" placeholder="Jenis Usaha" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="opdPengampu">OPD Pengampu</label>
+                                <select wire:model="user_id" class="form-control" id="opdPengampu">
+                                    <option value="">Tidak Ada</option>
+                                    @if ($users->isNotEmpty())
+                                        @foreach ($users as $usr)
+                                            <option value="{{ $usr->id }}">{{ $usr->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
                         @endif
                         <div class="form-group">
@@ -145,6 +168,48 @@
                                     Awesome</a>. Silahkan gunakan kode yang berformat seperti : fas fa-book; far
                                 fa-book; tanpa menyertakan tag htmlnya.
                             </small>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                        <button type="button" class="btn btn-default" wire:click="resetForm"
+                            data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal Kriteria -->
+    <div wire:ignore.self class="modal fade" data-backdrop="static" id="modalKriteria">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ $modalTitle ? $modalTitle : ' Kriteria' }}</h4>
+                    <button type="button" class="close" wire:click="resetForm" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" wire:submit.prevent="store()">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="namaKriteria">Nama Kriteria</label>
+                            <input wire:model.lazy="kriteria" type="text" class="form-control" id="namaKriteria"
+                                placeholder="Nama Kriteria" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalMin">Modal Minimal</label>
+                            <input wire:model.lazy="modal_min" type="number" class="form-control" id="modalMin"
+                                placeholder="Modal Minimal" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalMax">Modal Maksimal</label>
+                            <input wire:model.lazy="modal_max" type="number" class="form-control" id="modalMax"
+                                placeholder="Modal Maksimal" required>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">

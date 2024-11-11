@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Imports\UsahaImport;
 use App\Models\JenisUsaha;
 use App\Models\Kategori;
+use App\Models\Kriteria;
 use App\Models\Produk;
 use App\Models\Usaha as ModelsUsaha;
 use App\Models\User;
+use Excel;
 use Hash;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -20,11 +23,13 @@ class Usaha extends Component
     protected $listeners = ['editUsaha' => 'editEkraf', 'detailUsaha' => 'detailEkraf', 'deleteId' => 'deleteId', 'addProduk' => 'addProduk'];
     public $nama_produk, $harga, $foto_produk, $tipe_produk, $deskripsi_produk, $ekspor;
     public $usaha_id, $nama_usaha, $kategori, $kategori_id, $jenis_usaha, $jenis_usaha_id, $user, $modalTitle, $deskripsi, $alamat, $website, $link_maps, $logo, $name, $email, $no_hp, $password, $editMode, $delete_id, $filelogo, $nama_kategori, $nama_jenis;
+    public $instagram, $tiktok, $facebook, $twitter, $shopee, $tokopedia, $kriteria_id, $kriteria, $jumlah_pekerja, $whatsapp, $youtube, $file_import;
     public $detailMode = false;
     public function mount()
     {
         $this->kategori = Kategori::all();
-        $this->jenis_usaha = JenisUsaha::all();
+        $this->jenis_usaha = JenisUsaha::orderBy('jenis_usaha', 'ASC')->get();
+        $this->kriteria = Kriteria::all();
 
         if (Auth::user()->hasRole('user')) {
             $countusaha = ModelsUsaha::where('user_id', Auth::user()->id)->count();
@@ -42,6 +47,16 @@ class Usaha extends Component
                 $this->kategori_id = $usaha->kategori_id;
                 $this->jenis_usaha_id = $usaha->jenis_usaha_id;
                 $this->filelogo = $usaha->logo;
+                $this->instagram = $usaha->instagram;
+                $this->tiktok = $usaha->tiktok;
+                $this->facebook = $usaha->facebook;
+                $this->twitter = $usaha->twitter;
+                $this->shopee = $usaha->shopee;
+                $this->tokopedia = $usaha->tokopedia;
+                $this->jumlah_pekerja = $usaha->jumlah_pekerja;
+                $this->kriteria_id = $usaha->kriteria_id;
+                $this->whatsapp = $usaha->whatsapp;
+                $this->youtube = $usaha->youtube;
             }
         }
     }
@@ -89,10 +104,20 @@ class Usaha extends Component
         $this->alamat = $ekraf->alamat;
         $this->deskripsi = $ekraf->deskripsi;
         $this->website = $ekraf->website;
+        $this->instagram = $ekraf->instagram;
+        $this->tiktok = $ekraf->tiktok;
+        $this->facebook = $ekraf->facebook;
+        $this->twitter = $ekraf->twitter;
+        $this->shopee = $ekraf->shopee;
+        $this->tokopedia = $ekraf->tokopedia;
+        $this->jumlah_pekerja = $ekraf->jumlah_pekerja;
+        $this->kriteria_id = $ekraf->kriteria_id;
         $this->link_maps = $ekraf->link_maps;
         $this->kategori_id = $ekraf->kategori_id;
         $this->jenis_usaha_id = $ekraf->jenis_usaha_id;
         $this->filelogo = $ekraf->logo;
+        $this->whatsapp = $ekraf->whatsapp;
+        $this->youtube = $ekraf->youtube;
     }
 
     public function detailEkraf($id)
@@ -110,6 +135,16 @@ class Usaha extends Component
         $this->name = $ekraf->user->name;
         $this->no_hp = $ekraf->user->no_hp;
         $this->email = $ekraf->user->email;
+        $this->instagram = $ekraf->instagram;
+        $this->tiktok = $ekraf->tiktok;
+        $this->facebook = $ekraf->facebook;
+        $this->twitter = $ekraf->twitter;
+        $this->shopee = $ekraf->shopee;
+        $this->tokopedia = $ekraf->tokopedia;
+        $this->jumlah_pekerja = $ekraf->jumlah_pekerja;
+        $this->kriteria_id = $ekraf->kriteria_id;
+        $this->whatsapp = $ekraf->whatsapp;
+        $this->youtube = $ekraf->youtube;
     }
 
     public function updatedLogo()
@@ -124,6 +159,8 @@ class Usaha extends Component
     {
         $this->reset(['nama_produk', 'tipe_produk', 'foto_produk', 'deskripsi_produk', 'harga', 'ekspor']);
         $this->reset(['nama_kategori', 'nama_jenis', 'usaha_id', 'nama_usaha', 'kategori_id', 'jenis_usaha_id', 'user', 'modalTitle', 'deskripsi', 'alamat', 'website', 'link_maps', 'logo', 'filelogo', 'name', 'email', 'no_hp', 'password', 'editMode', 'delete_id']);
+        $this->reset(['instagram', 'facebook', 'twitter', 'tiktok', 'shopee', 'tokopedia', 'jumlah_pekerja', 'whatsapp', 'youtube', 'file_import']);
+        $this->kriteria_id = '';
         $this->kategori_id = '';
         $this->jenis_usaha_id = '';
         $this->detailMode = false;
@@ -177,7 +214,17 @@ class Usaha extends Component
             'alamat' => $this->alamat,
             'deskripsi' => $this->deskripsi,
             'website' => $this->website,
+            'jumlah_pekerja' => $this->jumlah_pekerja,
+            'kriteria_id' => $this->kriteria_id,
+            'instagram' => $this->instagram,
+            'tiktok' => $this->tiktok,
+            'facebook' => $this->facebook,
+            'twitter' => $this->twitter,
+            'shopee' => $this->shopee,
+            'tokopedia' => $this->tokopedia,
             'link_maps' => $this->link_maps,
+            'youtube' => $this->youtube,
+            'whatsapp' => $this->whatsapp,
             'logo' => $filename,
             'isVerified' => $verify,
         ]);
@@ -214,6 +261,16 @@ class Usaha extends Component
             $this->kategori_id = $usaha->kategori_id;
             $this->jenis_usaha_id = $usaha->jenis_usaha_id;
             $this->filelogo = $usaha->logo;
+            $this->instagram = $usaha->instagram;
+            $this->tiktok = $usaha->tiktok;
+            $this->facebook = $usaha->facebook;
+            $this->twitter = $usaha->twitter;
+            $this->shopee = $usaha->shopee;
+            $this->tokopedia = $usaha->tokopedia;
+            $this->jumlah_pekerja = $usaha->jumlah_pekerja;
+            $this->kriteria_id = $usaha->kriteria_id;
+            $this->whatsapp = $usaha->whatsapp;
+            $this->youtube = $usaha->youtube;
         }
     }
 
@@ -245,6 +302,23 @@ class Usaha extends Component
         ]);
         $this->resetForm();
         $this->dispatchBrowserEvent('closeModalProduk');
+    }
+
+    public function import()
+    {
+        // dd($this->file_import);
+        $file_path = $this->file_import->store('files', 'public');
+        // dd($file_path);
+        Excel::import(new UsahaImport($this->kriteria_id, $this->jenis_usaha_id, $this->kategori_id), storage_path('/app/public/' . $file_path));
+        Storage::disk('public')->delete($file_path);
+
+        $this->resetForm();
+        $this->emit('closeModalImport');
+        $this->alert('success', 'Data berhasil diimport!', [
+            'position' => 'center',
+            'timer' => 3000,
+            'toast' => true,
+        ]);
     }
 
     public function deleteId($id)

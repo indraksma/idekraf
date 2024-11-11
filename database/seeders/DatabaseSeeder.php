@@ -76,5 +76,10 @@ class DatabaseSeeder extends Seeder
                 'icon' => 'fas fa-school'
             ]
         );
+        $this->call([
+            SettingSeeder::class,
+            OpdSeeder::class,
+            UmkmSeeder::class,
+        ]);
     }
 }
