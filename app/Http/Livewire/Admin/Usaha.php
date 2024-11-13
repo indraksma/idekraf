@@ -201,7 +201,6 @@ class Usaha extends Component
                 $filename = md5($this->logo . microtime()) . '.' . $this->logo->extension();
                 $this->logo->storeAs('img', $filename);
                 if (Storage::disk('local')->exists('img/' . $ekraf->logo)) {
-                    $this->alert('success', 'Ada filenya lho');
                     Storage::disk('local')->delete('img/' . $ekraf->logo);
                 }
             } else {
@@ -338,9 +337,24 @@ class Usaha extends Component
                 Produk::where('usaha_id', $this->delete_id)->delete();
             }
             $usaha = ModelsUsaha::find($this->delete_id);
+            $usahalogo = $usaha->logo;
             $usaha->delete();
 
             DB::commit();
+            if ($produk->isNotEmpty()) {
+                foreach ($produk as $prod) {
+                    if ($prod->foto != NULL) {
+                        if (Storage::disk('local')->exists('img/' . $prod->foto)) {
+                            Storage::disk('local')->delete('img/' . $prod->foto);
+                        }
+                    }
+                }
+            }
+            if ($usahalogo != NULL) {
+                if (Storage::disk('local')->exists('img/' . $usahalogo)) {
+                    Storage::disk('local')->delete('img/' . $usahalogo);
+                }
+            }
             $this->alert('success', 'Data deleted successfully.', [
                 'position' => 'center',
                 'timer' => 3000,

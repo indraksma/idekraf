@@ -24,6 +24,7 @@ Route::get('ekraf', App\Http\Livewire\Ekraf::class)->name('ekraf');
 Route::get('ekraf/{id}', App\Http\Livewire\EkrafDetail::class)->name('ekraf.detail');
 Route::get('produk', App\Http\Livewire\Produk::class)->name('produk');
 Route::get('produk/{id}', App\Http\Livewire\ProdukDetail::class)->name('produk.detail');
+Route::get('contact', App\Http\Livewire\Contact::class)->name('contact');
 
 Route::middleware(['auth', 'role:admin|user|opd'])->group(function () {
     Route::get('admin', App\Http\Livewire\Admin\Dashboard::class)->name('admin');

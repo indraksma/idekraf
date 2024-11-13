@@ -130,7 +130,14 @@ class Produk extends Component
     public function destroy()
     {
         $produk = ModelsProduk::find($this->delete_id);
+        $produkfoto = $produk->foto;
         $produk->delete();
+
+        if ($produkfoto != NULL) {
+            if (Storage::disk('local')->exists('img/' . $produkfoto)) {
+                Storage::disk('local')->delete('img/' . $produkfoto);
+            }
+        }
 
         $this->alert('success', 'Data deleted successfully.', [
             'position' => 'center',
