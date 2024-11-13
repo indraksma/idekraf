@@ -6,7 +6,7 @@
         </div><!-- /.col -->
         <div class="col-sm-2">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active">Ubah Password</li>
+                <li class="breadcrumb-item active">Pengaturan Akun</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -19,10 +19,15 @@
                     <form method="POST" wire:submit.prevent="store()">
                         <div class="form-group">
                             <label for="inputEmail">E-mail</label>
-                            <input wire:model="email" type="text" class="form-control" id="inputEmail" readonly>
+                            <input wire:model="email" type="text" class="form-control" id="inputEmail" required>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword">Password Lama</label>
+                            <label for="inputName">Nama</label>
+                            <input wire:model="name" type="text" class="form-control" id="inputName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">Password Lama <small>(Wajib diisi agar dapat menyimpan
+                                    perubahan)</small></label>
                             <input wire:model="oldPass" type="password"
                                 class="form-control @if ($errorOldPass === true) is-invalid @elseif($errorOldPass === false) is-valid @endif"
                                 id="inputPassword" placeholder="Password Lama" required>
@@ -31,9 +36,10 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="inputNewPassword">Password Baru</label>
+                            <label for="inputNewPassword">Password Baru <small>(Kosongkan jika tidak ingin mengganti
+                                    password)</small></label>
                             <input wire:model.lazy="newPass" type="password" class="form-control" id="inputNewPassword"
-                                placeholder="Password Baru" minlength="8" required>
+                                placeholder="Password Baru" minlength="8">
                         </div>
                         @if ($errorOldPass === false)
                             <button type="submit" class="btn btn-success">Simpan</button>

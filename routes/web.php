@@ -20,12 +20,15 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', App\Http\Livewire\Home::class);
 Route::get('home', App\Http\Livewire\Home::class)->name('home');
 Route::get('ekraf', App\Http\Livewire\Ekraf::class)->name('ekraf');
+Route::get('ekraf/{id}', App\Http\Livewire\EkrafDetail::class)->name('ekraf.detail');
+Route::get('produk', App\Http\Livewire\Produk::class)->name('produk');
+Route::get('produk/{id}', App\Http\Livewire\ProdukDetail::class)->name('produk.detail');
 
 Route::middleware(['auth', 'role:admin|user|opd'])->group(function () {
     Route::get('admin', App\Http\Livewire\Admin\Dashboard::class)->name('admin');
     Route::get('admin/usaha', App\Http\Livewire\Admin\Usaha::class)->name('admin.usaha');
     Route::get('admin/produk', App\Http\Livewire\Admin\Produk::class)->name('admin.produk');
-    Route::get('admin/changepass', App\Http\Livewire\Admin\ChangePassword::class)->name('admin.chpass');
+    Route::get('admin/account', App\Http\Livewire\Admin\ChangePassword::class)->name('admin.account');
 });
 Route::middleware(['auth', 'role:admin|opd'])->group(function () {
     Route::get('admin/verusaha', App\Http\Livewire\Admin\VerUsaha::class)->name('admin.verusaha');

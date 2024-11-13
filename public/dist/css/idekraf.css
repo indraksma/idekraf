@@ -1,455 +1,527 @@
 .index-top {
-            min-height: 720px;
-            background: url('/fullwavy-bg.jpg');
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
+    min-height: 720px;
+    background: url('/fullwavy-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
 
-        .direktori-box {
-            padding: 20px 10px;
-            overflow: hidden;
-            width: 100%;
-            border-radius: 20px;
+.direktori-box {
+    padding: 20px 10px;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.direktori-box:hover,
+.direktori-box:focus {
+    text-decoration: none;
+}
+
+.direktori-box .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: white;
+    margin: 0px auto 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.direktori-box span {
+    color: #808080;
+    font-size: 12px;
+}
+
+.direktori-kreasi {
+    background-color: white;
+    border-radius: 20px;
+    padding: 22px 24px;
+
+    .head {
+        overflow: hidden;
+        width: 100%;
+        margin-bottom: 18px;
+
+        span {
+            font-weight: bold;
             display: inline-block;
         }
 
-        .direktori-box:hover,
-        .direktori-box:focus {
-            text-decoration: none;
-        }
-
-        .direktori-box .icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background-color: white;
-            margin: 0px auto 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .direktori-box span {
-            color: #808080;
+        a {
+            float: right;
+            display: inline-block;
             font-size: 12px;
-        }
-
-        .direktori-kreasi {
-            background-color: white;
-            border-radius: 20px;
-            padding: 22px 24px;
-
-            .head {
-                overflow: hidden;
-                width: 100%;
-                margin-bottom: 18px;
-
-                span {
-                    font-weight: bold;
-                    display: inline-block;
-                }
-
-                a {
-                    float: right;
-                    display: inline-block;
-                    font-size: 12px;
-                    font-weight: bold;
-                    color: green;
-                }
-            }
-
-            .kategori {
-                .row {
-                    margin-left: -5px;
-                    margin-right: -5px;
-                }
-
-                .col {
-                    padding-left: 5px;
-                    padding-right: 5px;
-                    position: relative;
-                    width: 100%;
-                    display: flex;
-                    flex-basis: auto;
-                }
-
-                .direktori-box {
-                    background-color: #f2faf5;
-                    text-align: center;
-
-                    &:hover,
-                    &:focus {
-                        text-decoration: none;
-                        background-color: #e5f5eb;
-                    }
-
-                    .title {
-                        color: green;
-                    }
-
-                    span {}
-                }
-            }
-        }
-
-        .index-main {
-            background-color: #fff;
-            padding: 50px 0px 50px;
-        }
-
-        .ekraf-list {
-            padding: 10px 20px 10px;
-        }
-
-        .index-main .totals-section {
-            padding: 25px 110px;
-            background-color: #f9fafc;
-            border-radius: 20px;
-            margin-bottom: 30px;
-        }
-
-        .index-main .totals-section .totals-item {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #333333;
-        }
-
-        .index-main .totals-section .totals-item img {
-            margin-right: 10px;
-        }
-
-        .index-main .totals-section .totals-item b {
-            font-size: 32px;
-            margin-right: 10px;
-        }
-
-        .index-main .totals-section .totals-item span {
-            color: #808080;
-            padding-top: 15px;
-        }
-
-        .index-main .totals-section a.totals-item:hover {
-            text-decoration: none;
-            background: #CDE9F7;
-            border-radius: 6px;
-        }
-
-        .index-main .index-main-content .head {
-            font-size: 24px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-
-        .index-main .index-main-content .head a {
-            font-size: 14px;
-            color: #00983A;
-            float: right;
             font-weight: bold;
+            color: green;
         }
+    }
 
-        .ekraf-list .index-main-content .head {
-            font-size: 24px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-
-        .ekraf-list .index-main-content .head a {
-            font-size: 14px;
-            color: #00983A;
-            float: right;
-            font-weight: bold;
-        }
-
-        .index-main .sub-sektor {
+    .kategori {
+        .row {
             margin-left: -5px;
             margin-right: -5px;
         }
 
-        .index-main .sub-sektor .head span {
-            color: #36A9E1;
-            font-size: 36px;
-            font-weight: bold;
-        }
-
-        .index-main .sub-sektor .row {
-            margin-left: -5px;
-            margin-right: -5px;
-        }
-
-        .index-main .sub-sektor .col {
+        .col {
             padding-left: 5px;
             padding-right: 5px;
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-basis: auto;
         }
 
-        .index-main .sub-sektor .direktori-box {
-            background-color: #f9fafc;
-            margin-bottom: 10px;
+        .direktori-box {
+            background-color: #f2faf5;
             text-align: center;
-        }
 
-        .index-main .sub-sektor .direktori-box:hover,
-        .index-main .sub-sektor .direktori-box:focus {
-            background-color: #cde9f7;
-        }
-
-        .index-main .sub-sektor .direktori-box .title {
-            color: #333333;
-            font-weight: 500;
-        }
-
-        .index-main .sub-sektor .direktori-box span {
-            color: #808080;
-        }
-
-        .index-main .direktori-baru .box {
-            text-decoration: none;
-            background-color: #f9fafc;
-            padding: 12px;
-            border-radius: 20px;
-        }
-
-        .index-main .direktori-baru .box:hover,
-        .index-main .direktori-baru .box:focus {
-            background-color: #e5f5eb;
-        }
-
-        .index-main .direktori-baru .box:hover .title,
-        .index-main .direktori-baru .box:focus .title {
-            color: #00983A;
-        }
-
-        .index-main .direktori-baru .box img {
-            margin-right: 12px;
-        }
-
-        .index-main .direktori-baru .box .title {
-            color: #333333;
-            height: 20px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-weight: bold;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-        }
-
-        .index-main .direktori-baru .box p {
-            font-size: 12px;
-            margin-bottom: 0px;
-            color: #808080;
-        }
-
-        .ekraf-list .direktori-baru .box {
-            text-decoration: none;
-            background-color: #fff;
-            padding: 12px;
-            border-radius: 20px;
-        }
-
-        .ekraf-list .direktori-baru .box:hover,
-        .ekraf-list .direktori-baru .box:focus {
-            background-color: #e5f5eb;
-        }
-
-        .ekraf-list .direktori-baru .box:hover .title,
-        .ekraf-list .direktori-baru .box:focus .title {
-            color: #00983A;
-        }
-
-        .ekraf-list .direktori-baru .box img {
-            margin-right: 12px;
-        }
-
-        .ekraf-list .direktori-baru .box .title {
-            color: #333333;
-            height: 20px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-weight: bold;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-        }
-
-        .ekraf-list .direktori-baru .box p {
-            font-size: 12px;
-            margin-bottom: 0px;
-            color: #808080;
-        }
-
-        .index-main .berita .box {
-            padding: 18px;
-            background-color: #f9fafc;
-            border-radius: 20px;
-        }
-
-        .index-main .berita .box img {
-            margin-bottom: 15px;
-            width: 100%;
-        }
-
-        .index-main .berita .box .title {
-            font-size: 16px;
-            font-weight: bold;
-            height: 45px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-bottom: 8px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        .index-main .berita .box p {
-            color: #808080;
-            font-size: 12px;
-            height: 70px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-        }
-
-        .index-main .berita .box a {
-            color: #00983A;
-        }
-
-        .index-main .kreasi .box {
-            padding: 18px 12px 22px 18px;
-            border-radius: 20px;
-            background-color: #F9FAFC;
-            text-decoration: none;
-            color: #333333;
-        }
-
-        .index-main .kreasi .box:hover,
-        .index-main .kreasi .box:focus {
-            background-color: #fffce5;
-        }
-
-        .index-main .kreasi .box .title {
-            font-weight: bold;
-            margin-bottom: 5px;
-            overflow: hidden;
-            height: 40px;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        .index-main .kreasi .box p {
-            font-size: 12px;
-            margin-bottom: 10px;
-            color: #808080;
-            height: 58px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-
-        .index-main .kreasi .poster {
-            width: 100%;
-            margin-bottom: 12px;
-        }
-
-        .index-main .kreasi .date {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
-            background-color: #ffef80;
-            text-align: center;
-            padding-top: 7px;
-            margin-right: 15px;
-        }
-
-        .index-main .kreasi .date h3 {
-            margin-bottom: 0px;
-            font-size: 24px;
-            line-height: 20px;
-            font-weight: bold;
-        }
-
-        .index-main .kreasi .date span {
-            font-size: 12px;
-        }
-
-        .index-main .kreasi .location {
-            font-size: 10px;
-            color: #808080;
-        }
-
-        .index-main .kreasi .location img {
-            margin-right: 5px;
-        }
-
-        .index-main .logo-sponsor {
-            overflow: hidden;
-        }
-
-        .index-main .logo-sponsor .slide-show .item {
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .index-main .logo-sponsor .slide-show .item img {
-            width: 100%;
-            padding: 0 40px;
-        }
-
-        .index-main .peta {
-            height: 100%;
-            border-radius: 20px;
-        }
-
-        .index-main .direktori-baru .box {
-            margin-bottom: 30px;
-        }
-
-        .ekraf-list .direktori-baru .box {
-            margin-bottom: 20px;
-        }
-
-        .index-main .berita .box {
-            margin-bottom: 30px;
-        }
-
-        .index-main .kreasi .box {
-            margin-bottom: 30px;
-        }
-
-        @media (max-width: 992px) {
-            .index-top .direktori-kreasi {
-                margin-bottom: 30px;
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                background-color: #e5f5eb;
             }
 
-            .index-top .direktori-kreasi .kategori .direktori-box {
-                margin-bottom: 10px;
+            .title {
+                color: green;
             }
 
-            .index-main .direktori-baru .box {
-                margin-bottom: 30px;
-            }
-
-            .ekraf-list .direktori-baru .box {
-                margin-bottom: 30px;
-            }
-
-            .index-main .berita .box {
-                margin-bottom: 30px;
-            }
-
-            .index-main .kreasi .box {
-                margin-bottom: 30px;
-            }
+            span {}
         }
+    }
+}
 
-        @media (max-width: 574px) {
-            .index-main .kreasi .box {
-                padding: 18px 0px 22px 0px;
-            }
-        }
+.index-main {
+    background-color: #fff;
+    padding: 50px 0px 50px;
+}
+
+.ekraf-list {
+    padding: 10px 20px 10px;
+}
+
+.index-main .totals-section {
+    padding: 25px 110px;
+    background-color: #f9fafc;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.index-main .totals-section .totals-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333333;
+}
+
+.index-main .totals-section .totals-item img {
+    margin-right: 10px;
+}
+
+.index-main .totals-section .totals-item b {
+    font-size: 32px;
+    margin-right: 10px;
+}
+
+.index-main .totals-section .totals-item span {
+    color: #808080;
+    padding-top: 15px;
+}
+
+.index-main .totals-section a.totals-item:hover {
+    text-decoration: none;
+    background: #CDE9F7;
+    border-radius: 6px;
+}
+
+.index-main .index-main-content .head {
+    font-size: 24px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.index-main .index-main-content .head a {
+    font-size: 14px;
+    color: #00983A;
+    float: right;
+    font-weight: bold;
+}
+
+.ekraf-list .index-main-content .head {
+    font-size: 24px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.ekraf-list .index-main-content .head a {
+    font-size: 14px;
+    color: #00983A;
+    float: right;
+    font-weight: bold;
+}
+
+.index-main .sub-sektor {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.index-main .sub-sektor .head span {
+    color: #36A9E1;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.index-main .sub-sektor .row {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.index-main .sub-sektor .col {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.index-main .sub-sektor .direktori-box {
+    background-color: #f9fafc;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.index-main .sub-sektor .direktori-box:hover,
+.index-main .sub-sektor .direktori-box:focus {
+    background-color: #cde9f7;
+}
+
+.index-main .sub-sektor .direktori-box .title {
+    color: #333333;
+    font-weight: 500;
+}
+
+.index-main .sub-sektor .direktori-box span {
+    color: #808080;
+}
+
+.index-main .direktori-baru .box {
+    text-decoration: none;
+    background-color: #f9fafc;
+    padding: 12px;
+    border-radius: 20px;
+}
+
+.index-main .direktori-baru .box:hover,
+.index-main .direktori-baru .box:focus {
+    background-color: #e5f5eb;
+}
+
+.index-main .direktori-baru .box:hover .title,
+.index-main .direktori-baru .box:focus .title {
+    color: #00983A;
+}
+
+.index-main .direktori-baru .box img {
+    margin-right: 12px;
+}
+
+.index-main .direktori-baru .box .title {
+    color: #333333;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.index-main .direktori-baru .box p {
+    font-size: 12px;
+    margin-bottom: 0px;
+    color: #808080;
+}
+
+.ekraf-list .direktori-baru .box {
+    text-decoration: none;
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 20px;
+}
+
+.ekraf-list .direktori-baru .box:hover,
+.ekraf-list .direktori-baru .box:focus {
+    background-color: #e5f5eb;
+}
+
+.ekraf-list .direktori-baru .box:hover .title,
+.ekraf-list .direktori-baru .box:focus .title {
+    color: #00983A;
+}
+
+.ekraf-list .direktori-baru .box img {
+    margin-right: 12px;
+}
+
+.ekraf-list .direktori-baru .box .title {
+    color: #333333;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.ekraf-list .direktori-baru .box p {
+    font-size: 12px;
+    margin-bottom: 0px;
+    color: #808080;
+}
+
+.index-main .berita .box {
+    padding: 18px;
+    background-color: #f9fafc;
+    border-radius: 20px;
+}
+
+.index-main .berita .box img {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.index-main .berita .box .title {
+    font-size: 16px;
+    font-weight: bold;
+    height: 45px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.index-main .berita .box p {
+    color: #808080;
+    font-size: 12px;
+    height: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.index-main .berita .box a {
+    color: #00983A;
+}
+
+.index-main .kreasi .box {
+    padding: 18px 12px 22px 18px;
+    border-radius: 20px;
+    background-color: #F9FAFC;
+    text-decoration: none;
+    color: #333333;
+}
+
+.index-main .kreasi .box:hover,
+.index-main .kreasi .box:focus {
+    background-color: #fffce5;
+}
+
+.index-main .kreasi .box .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    overflow: hidden;
+    height: 40px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.index-main .kreasi .box p {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #808080;
+    height: 58px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.index-main .kreasi .poster {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.index-main .kreasi .date {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background-color: #ffef80;
+    text-align: center;
+    padding-top: 7px;
+    margin-right: 15px;
+}
+
+.index-main .kreasi .date h3 {
+    margin-bottom: 0px;
+    font-size: 24px;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.index-main .kreasi .date span {
+    font-size: 12px;
+}
+
+.index-main .kreasi .location {
+    font-size: 10px;
+    color: #808080;
+}
+
+.index-main .kreasi .location img {
+    margin-right: 5px;
+}
+
+.index-main .logo-sponsor {
+    overflow: hidden;
+}
+
+.index-main .logo-sponsor .slide-show .item {
+    display: inline-flex;
+    align-items: center;
+}
+
+.index-main .logo-sponsor .slide-show .item img {
+    width: 100%;
+    padding: 0 40px;
+}
+
+.index-main .peta {
+    height: 100%;
+    border-radius: 20px;
+}
+
+.index-main .direktori-baru .box {
+    margin-bottom: 30px;
+}
+
+.ekraf-list .direktori-baru .box {
+    margin-bottom: 20px;
+}
+
+.index-main .berita .box {
+    margin-bottom: 30px;
+}
+
+.index-main .kreasi .box {
+    margin-bottom: 30px;
+}
+
+@media (max-width: 992px) {
+    .index-top .direktori-kreasi {
+        margin-bottom: 30px;
+    }
+
+    .index-top .direktori-kreasi .kategori .direktori-box {
+        margin-bottom: 10px;
+    }
+
+    .index-main .direktori-baru .box {
+        margin-bottom: 30px;
+    }
+
+    .ekraf-list .direktori-baru .box {
+        margin-bottom: 30px;
+    }
+
+    .index-main .berita .box {
+        margin-bottom: 30px;
+    }
+
+    .index-main .kreasi .box {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 574px) {
+    .index-main .kreasi .box {
+        padding: 18px 0px 22px 0px;
+    }
+}
+
+.btn-ig {
+    color: #fff;
+    background-color: #F603AF;
+    border-color: #F603AF;
+    box-shadow: none;
+}
+
+.btn-ig:hover,
+.btn-ig:focus,
+.btn-ig:active,
+.btn-ig.active,
+.open>.dropdown-toggle.btn-tiktok {
+    color: #fff;
+    background-color: #b601ad;
+    border-color: #b601ad;
+    /*set the color you want here*/
+}
+
+.btn-tiktok {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+    box-shadow: none;
+}
+
+.btn-tiktok:hover,
+.btn-tiktok:focus,
+.btn-tiktok:active,
+.btn-tiktok.active,
+.open>.dropdown-toggle.btn-tiktok {
+    color: #fff;
+    background-color: #242424;
+    border-color: #242424;
+    /*set the color you want here*/
+}
+
+.btn-shopee {
+    color: #fff;
+    background-color: #dd5800;
+    border-color: #dd5800;
+    box-shadow: none;
+}
+
+.btn-shopee:hover,
+.btn-shopee:focus,
+.btn-shopee:active,
+.btn-shopee.active,
+.open>.dropdown-toggle.btn-shopee {
+    color: #fff;
+    background-color: #8a3f0d;
+    border-color: #8a3f0d;
+    /*set the color you want here*/
+}
+
+.btn-tokped {
+    color: #fff;
+    background-color: #03AC0E;
+    border-color: #03AC0E;
+    box-shadow: none;
+}
+
+.btn-tokped:hover,
+.btn-tokped:focus,
+.btn-tokped:active,
+.btn-tokped.active,
+.open>.dropdown-toggle.btn-tokped {
+    color: #fff;
+    background-color: #06750d;
+    border-color: #06750d;
+    /*set the color you want here*/
+}

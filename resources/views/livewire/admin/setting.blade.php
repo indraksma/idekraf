@@ -45,7 +45,7 @@
                                 Usaha</a>
                         </li>
                         <li class="nav-item"><a class="nav-link @if ($tabActive == 2) active @endif"
-                                href="#jenis" data-toggle="tab" wire:click.prevent="changeTab('2')">Jenis Usaha</a>
+                                href="#jenis" data-toggle="tab" wire:click.prevent="changeTab('2')">Sektor Usaha</a>
                         </li>
                         <li class="nav-item"><a class="nav-link @if ($tabActive == 4) active @endif"
                                 href="#kriteria" data-toggle="tab" wire:click.prevent="changeTab('4')">Kriteria UMKM</a>
@@ -66,7 +66,7 @@
                         <div class="tab-pane @if ($tabActive == 2) active @endif" id="jenis">
                             <button class="btn btn-sm btn-success m-2" wire:click="addJenis" data-target="#modalSetting"
                                 data-toggle="modal"><i class="fas fa-plus"></i>&nbsp;Tambah
-                                Jenis Usaha</button>
+                                Sektor Usaha</button>
                             <livewire:admin.jenis-usaha />
                         </div>
                         <div class="tab-pane @if ($tabActive == 3) active @endif" id="slider">
@@ -155,6 +155,10 @@
                                         @endforeach
                                     @endif
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="descJenis">Deskripsi</label>
+                                <textarea wire:model.lazy="deskripsi" class="form-control" rows="4" id="descJenis"></textarea>
                             </div>
                         @endif
                         <div class="form-group">

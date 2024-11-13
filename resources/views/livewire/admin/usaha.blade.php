@@ -113,6 +113,9 @@
                                         <input wire:model="foto_produk" type="file"
                                             class="form-control @error('foto_produk') is-invalid @enderror"
                                             accept="image/png, image/jpeg" id="fileProduk">
+                                        <div wire:loading wire:target="foto_produk">
+                                            Uploading ...
+                                        </div>
                                         @error('foto_produk')
                                             <div class="alert alert-danger text-sm">{{ $message }}</div>
                                         @enderror
@@ -128,7 +131,8 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="submit" wire:loading.attr="disabled" wire:target="foto_produk"
+                                class="btn btn-success">Simpan</button>
                             <button type="button" class="btn btn-default" wire:click="resetForm"
                                 data-dismiss="modal">Batal</button>
                         </div>
@@ -200,6 +204,9 @@
                                         <input wire:model="logo" type="file"
                                             class="form-control @error('logo') is-invalid @enderror"
                                             accept="image/png, image/jpeg" id="fileLogo">
+                                        <div wire:loading wire:target="logo">
+                                            Uploading ...
+                                        </div>
                                         @error('logo')
                                             <div class="alert alert-danger text-sm">{{ $message }}</div>
                                         @enderror
@@ -352,7 +359,8 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="submit" class="btn btn-success" wire:login.attr="disabled"
+                                wire:target="logo">Simpan</button>
                             <button type="button" class="btn btn-default" wire:click="resetForm"
                                 data-dismiss="modal">Batal</button>
                         </div>
@@ -776,6 +784,9 @@
                                         <input wire:model="logo" type="file"
                                             class="form-control @error('logo') is-invalid @enderror"
                                             accept="image/png, image/jpeg" id="fileLogo">
+                                        <div wire:loading wire:target="logo">
+                                            Uploading ...
+                                        </div>
                                         @error('logo')
                                             <div class="alert alert-danger text-sm">{{ $message }}</div>
                                         @enderror
@@ -891,7 +902,8 @@
                                 </div>
                             </div>
                             <hr>
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="submit" class="btn btn-success" wire:loading.attr="disabled"
+                                wire:target="logo">Simpan</button>
                         </form>
                     </div>
                 </div>

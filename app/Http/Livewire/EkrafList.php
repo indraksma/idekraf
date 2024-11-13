@@ -18,14 +18,14 @@ class EkrafList extends Component
     {
         if ($this->kat_id != 0 || $this->ju_id != 0) {
             if ($this->kat_id == 0) {
-                $ekraf = Usaha::where('nama_usaha', 'like', '%' . $this->search_term . '%')->where('jenis_usaha_id', $this->ju_id)->orderBy('created_at', 'ASC')->paginate(12);
+                $ekraf = Usaha::where('nama_usaha', 'like', '%' . $this->search_term . '%')->where('jenis_usaha_id', $this->ju_id)->where('isVerified', TRUE)->orderBy('created_at', 'ASC')->paginate(12);
             } else if ($this->ju_id == 0) {
-                $ekraf = Usaha::where('nama_usaha', 'like', '%' . $this->search_term . '%')->where('kategori_id', $this->kat_id)->orderBy('created_at', 'ASC')->paginate(12);
+                $ekraf = Usaha::where('nama_usaha', 'like', '%' . $this->search_term . '%')->where('kategori_id', $this->kat_id)->where('isVerified', TRUE)->orderBy('created_at', 'ASC')->paginate(12);
             } else {
-                $ekraf = Usaha::where('nama_usaha', 'like', '%' . $this->search_term . '%')->where('kategori_id', $this->kat_id)->where('jenis_usaha_id', $this->ju_id)->orderBy('created_at', 'ASC')->paginate(12);
+                $ekraf = Usaha::where('nama_usaha', 'like', '%' . $this->search_term . '%')->where('kategori_id', $this->kat_id)->where('jenis_usaha_id', $this->ju_id)->where('isVerified', TRUE)->orderBy('created_at', 'ASC')->paginate(12);
             }
         } else {
-            $ekraf = Usaha::where('nama_usaha', 'like', '%' . $this->search_term . '%')->orderBy('created_at', 'ASC')->paginate(12);
+            $ekraf = Usaha::where('nama_usaha', 'like', '%' . $this->search_term . '%')->where('isVerified', TRUE)->orderBy('created_at', 'ASC')->paginate(12);
         }
         $searchTerm = $this->search_term;
         return view('livewire.ekraf-list', compact(['ekraf', 'searchTerm']));

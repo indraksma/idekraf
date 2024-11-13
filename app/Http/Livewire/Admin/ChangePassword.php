@@ -11,12 +11,13 @@ use Illuminate\Support\Facades\Hash;
 class ChangePassword extends Component
 {
     use LivewireAlert;
-    public $oldPass, $newPass, $user_id, $email, $errorOldPass, $errorMsg;
+    public $oldPass, $newPass, $user_id, $email, $errorOldPass, $errorMsg, $name;
 
     public function mount()
     {
         $user = User::find(Auth::user()->id);
         $this->user_id = $user->id;
+        $this->name = $user->name;
         $this->email = $user->email;
         $this->errorMsg = 'Password Lama Tidak Sesuai!';
     }
@@ -45,11 +46,15 @@ class ChangePassword extends Component
     public function store()
     {
         $user = User::find($this->user_id);
-        $user->password = Hash::make($this->newPass);
+        $user->name = $this->name;
+        $user->email = $this->email;
+        if ($this->newPass) {
+            $user->password = Hash::make($this->newPass);
+        }
         $user->update();
 
         $this->resetForm();
-        $this->alert('success', 'Password berhasil diubah', [
+        $this->alert('success', 'Data pengguna berhasil diubah', [
             'position' => 'center',
             'timer' => 3000,
             'toast' => true,

@@ -2,7 +2,7 @@
     <table class="table table-hover text-nowrap">
         <thead>
             <tr>
-                <th>Jenis Usaha</th>
+                <th>Sektor</th>
                 <th>Icon</th>
                 <th>Pengampu</th>
                 <th class="text-nowrap">Aksi</th>
@@ -32,7 +32,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td class="text-center" colspan="3">Belum ada data</td>
+                    <td class="text-center" colspan="4">Belum ada data</td>
                 </tr>
             @endif
         </tbody>

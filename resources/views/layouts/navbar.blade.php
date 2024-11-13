@@ -18,7 +18,7 @@
                     Hello, {{ Auth::user()->name }}!
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('admin.chpass') }}" class="dropdown-item text-center">Ubah Password</a>
+                <a href="{{ route('admin.account') }}" class="dropdown-item text-center">Pengaturan Akun</a>
                 <div class="dropdown-divider"></div>
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                     class="dropdown-item dropdown-footer bg-danger">Logout</a>

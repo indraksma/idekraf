@@ -1,4 +1,4 @@
-@section('title', 'Ekonomi Kreatif')
+@section('title', 'Produk Ekraf')
 @push('headscript')
     <link rel="stylesheet" type="text/css" href="{{ asset('dist/css/idekraf.css') }}" />
 @endpush
@@ -8,7 +8,7 @@
             <div class="col-md-8 py-4">
                 <div class="input-group">
                     <input type="search" class="form-control form-control-lg" wire:model.live.debounce.250ms="search"
-                        placeholder="Cari Ekraf">
+                        placeholder="Cari Produk">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="fa fa-search"></i>
@@ -63,15 +63,8 @@
                 </div>
             </div>
             <div class="col-md-9">
-                @if ($jenis_usaha_id != 0)
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <livewire:sektor-desc :jenis_usaha_id="$jenis_usaha_id" :key="$jenis_usaha_id" />
-                        </div>
-                    </div>
-                @endif
-                <livewire:ekraf-list :search_term="$search" :kat_id="$radio_kategori" :ju_id="$radio_jenis"
-                    wire:key="ekraf-{{ $radio_jenis . $radio_kategori . $search }}">
+                <livewire:produk-list :search_term="$search" :kat_id="$radio_kategori" :ju_id="$radio_jenis"
+                    wire:key="produk-{{ $radio_jenis . $radio_kategori . $search }}">
             </div>
         </div>
     </div>

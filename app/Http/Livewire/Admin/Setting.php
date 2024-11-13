@@ -18,7 +18,7 @@ class Setting extends Component
     protected $listeners = ['refresh' => '$refresh', 'editKategori' => 'editKategori', 'editJenis' => 'editJenis', 'deleteId' => 'deleteId', 'editKriteria' => 'editKriteria'];
     public $kategoriMode, $jenisMode, $icon, $kategori, $jenis_usaha, $modalTitle, $kategori_id, $jenis_usaha_id, $delete_id;
     public $slider1, $slider2, $slider3, $tabActive;
-    public $modal_max, $modal_min, $kriteria, $kriteria_id, $kriteriaMode, $user_id, $users;
+    public $modal_max, $modal_min, $kriteria, $kriteria_id, $kriteriaMode, $user_id, $users, $deskripsi;
 
     public function mount()
     {
@@ -133,6 +133,7 @@ class Setting extends Component
         $this->jenis_usaha = $data->jenis_usaha;
         $this->user_id = $data->user_id;
         $this->icon = $data->icon;
+        $this->deskripsi = $data->deskripsi;
     }
 
     public function addJenis()
@@ -155,6 +156,7 @@ class Setting extends Component
                 'jenis_usaha' => $this->jenis_usaha,
                 'user_id' => $this->user_id,
                 'icon' => $this->icon,
+                'deskripsi' => $this->deskripsi,
             ]);
         }
         if ($this->kriteriaMode) {
@@ -185,7 +187,7 @@ class Setting extends Component
     public function resetForm()
     {
         $this->reset(['kategoriMode', 'jenisMode', 'icon', 'kategori', 'jenis_usaha', 'modalTitle', 'kategori_id', 'jenis_usaha_id', 'delete_id']);
-        $this->reset(['kriteria', 'kriteria_id', 'modal_max', 'modal_min', 'kriteriaMode']);
+        $this->reset(['kriteria', 'kriteria_id', 'modal_max', 'modal_min', 'kriteriaMode', 'deskripsi']);
         $this->user_id = '';
     }
 

@@ -99,7 +99,7 @@ class Produk extends Component
                 $produk = ModelsProduk::find($this->produk_id);
                 $filename = $produk->foto;
             } else {
-                $filename = 'default_produk.jpg';
+                $filename = NULL;
             }
         }
         $produks = ModelsProduk::updateOrCreate(['id' => $this->produk_id], [
