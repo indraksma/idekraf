@@ -9,7 +9,9 @@ use App\Models\Kriteria;
 use App\Models\Produk;
 use App\Models\Usaha as ModelsUsaha;
 use App\Models\User;
+use DB;
 use Excel;
+use Exception;
 use Hash;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -328,14 +330,30 @@ class Usaha extends Component
 
     public function destroy()
     {
-        $usaha = ModelsUsaha::find($this->delete_id);
-        $usaha->delete();
+        $produk = Produk::where('usaha_id', $this->delete_id)->get();
 
-        $this->alert('success', 'Data deleted successfully.', [
-            'position' => 'center',
-            'timer' => 3000,
-            'toast' => true,
-        ]);
+        DB::beginTransaction();
+        try {
+            if ($produk->isNotEmpty()) {
+                Produk::where('usaha_id', $this->delete_id)->delete();
+            }
+            $usaha = ModelsUsaha::find($this->delete_id);
+            $usaha->delete();
+
+            DB::commit();
+            $this->alert('success', 'Data deleted successfully.', [
+                'position' => 'center',
+                'timer' => 3000,
+                'toast' => true,
+            ]);
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->alert('error', 'Data Gagal Dihapus!', [
+                'position' => 'center',
+                'timer' => 3000,
+                'toast' => true,
+            ]);
+        }
         $this->resetForm();
         $this->emit('refreshUsahaTable');
         $this->dispatchBrowserEvent('closeModalDelete');
