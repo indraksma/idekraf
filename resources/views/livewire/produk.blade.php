@@ -63,6 +63,13 @@
                 </div>
             </div>
             <div class="col-md-9">
+                @if ($jenis_usaha_id != 0)
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <livewire:sektor-desc :jenis_usaha_id="$jenis_usaha_id" :key="$jenis_usaha_id" />
+                        </div>
+                    </div>
+                @endif
                 <livewire:produk-list :search_term="$search" :kat_id="$radio_kategori" :ju_id="$radio_jenis"
                     wire:key="produk-{{ $radio_jenis . $radio_kategori . $search }}">
             </div>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UsahaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::middleware(['auth', 'role:admin|user|opd'])->group(function () {
 });
 Route::middleware(['auth', 'role:admin|opd'])->group(function () {
     Route::get('admin/verusaha', App\Http\Livewire\Admin\VerUsaha::class)->name('admin.verusaha');
+    Route::get('admin/usaha/export', [UsahaController::class, 'exportUsaha'])->name('export.usaha');
 });
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/user', App\Http\Livewire\Admin\User::class)->name('admin.user');

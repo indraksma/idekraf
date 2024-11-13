@@ -23,7 +23,7 @@ class Usaha extends Component
     protected $listeners = ['editUsaha' => 'editEkraf', 'detailUsaha' => 'detailEkraf', 'deleteId' => 'deleteId', 'addProduk' => 'addProduk'];
     public $nama_produk, $harga, $foto_produk, $tipe_produk, $deskripsi_produk, $ekspor;
     public $usaha_id, $nama_usaha, $kategori, $kategori_id, $jenis_usaha, $jenis_usaha_id, $user, $modalTitle, $deskripsi, $alamat, $website, $link_maps, $logo, $name, $email, $no_hp, $password, $editMode, $delete_id, $filelogo, $nama_kategori, $nama_jenis;
-    public $instagram, $tiktok, $facebook, $twitter, $shopee, $tokopedia, $kriteria_id, $kriteria, $jumlah_pekerja, $whatsapp, $youtube, $file_import;
+    public $instagram, $tiktok, $facebook, $twitter, $shopee, $tokopedia, $kriteria_id, $kriteria, $jumlah_pekerja, $whatsapp, $youtube, $file_import, $startDate, $endDate;
     public $detailMode = false;
     public function mount()
     {
@@ -159,7 +159,7 @@ class Usaha extends Component
     {
         $this->reset(['nama_produk', 'tipe_produk', 'foto_produk', 'deskripsi_produk', 'harga', 'ekspor']);
         $this->reset(['nama_kategori', 'nama_jenis', 'usaha_id', 'nama_usaha', 'kategori_id', 'jenis_usaha_id', 'user', 'modalTitle', 'deskripsi', 'alamat', 'website', 'link_maps', 'logo', 'filelogo', 'name', 'email', 'no_hp', 'password', 'editMode', 'delete_id']);
-        $this->reset(['instagram', 'facebook', 'twitter', 'tiktok', 'shopee', 'tokopedia', 'jumlah_pekerja', 'whatsapp', 'youtube', 'file_import']);
+        $this->reset(['instagram', 'facebook', 'twitter', 'tiktok', 'shopee', 'tokopedia', 'jumlah_pekerja', 'whatsapp', 'youtube', 'file_import', 'startDate', 'endDate']);
         $this->kriteria_id = '';
         $this->kategori_id = '';
         $this->jenis_usaha_id = '';

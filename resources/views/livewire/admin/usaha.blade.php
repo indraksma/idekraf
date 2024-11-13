@@ -29,6 +29,9 @@
         window.addEventListener('closeModalImport', event => {
             $('#importModal').modal('hide');
         });
+        window.addEventListener('closeModalExport', event => {
+            $('#exportModal').modal('hide');
+        });
     </script>
 @endpush
 <div>
@@ -41,12 +44,48 @@
                             data-toggle="modal">Tambah</button>
                         <button class="btn btn-info ml-2 mb-3" data-target="#importModal"
                             data-toggle="modal">Import</button>
+                        <button class="btn btn-primary mb-3 float-right" data-target="#exportModal"
+                            data-toggle="modal">Export</button>
                         <livewire:ekraf-table />
                     </div>
                 </div>
             </div>
         </div>
 
+        {{-- Modal Export --}}
+        <div wire:ignore.self class="modal fade" data-backdrop="static" id="exportModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Export Data Ekraf</h4>
+                        <button type="button" class="close" wire:click="resetForm" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="GET" action="{{ route('export.usaha') }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="start_date">Tanggal Awal</label>
+                                <input type="date" wire:model="startDate" name="start_date" class="form-control"
+                                    id="start_date" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="end_date">Tanggal Akhir</label>
+                                <input type="date" wire:model="endDate" name="end_date" class="form-control"
+                                    id="end_date" required />
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit" class="btn btn-success">Export</button>
+                            <button type="button" class="btn btn-default" wire:click="resetForm"
+                                data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         {{-- Modal Produk --}}
         <div wire:ignore.self class="modal fade" data-backdrop="static" id="produkModal">
             <div class="modal-dialog modal-lg">
@@ -92,7 +131,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="ekspor">Potensi Ekspor</label>
-                                        <select wire:model.lazy="ekspor" class="form-control" id="ekspor" required>
+                                        <select wire:model.lazy="ekspor" class="form-control" id="ekspor"
+                                            required>
                                             <option value="">-- Pilih --</option>
                                             <option value="1">Ya</option>
                                             <option value="0">Tidak</option>

@@ -53,6 +53,10 @@
                         <li class="nav-item"><a class="nav-link @if ($tabActive == 3) active @endif"
                                 href="#slider" data-toggle="tab" wire:click.prevent="changeTab('3')">Gambar Slider</a>
                         </li>
+                        <li class="nav-item"><a class="nav-link @if ($tabActive == 5) active @endif"
+                                href="#sosmed" data-toggle="tab" wire:click.prevent="changeTab('5')">Link Sosial
+                                Media</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="card-body p-0">
@@ -114,6 +118,35 @@
                                 data-target="#modalKriteria" data-toggle="modal"><i class="fas fa-plus"></i>&nbsp;Tambah
                                 Kriteria UMKM</button>
                             <livewire:admin.kriteria-umkm />
+                        </div>
+                        <div class="tab-pane @if ($tabActive == 5) active @endif" id="sosmed">
+                            <div class="p-4">
+                                <div class="alert alert-info">Link Sosial Media untuk Footer Halaman Utama
+                                </div>
+                                <form method="POST" wire:submit.prevent="storeSosmed()">
+                                    <div class="form-group">
+                                        <label for="instagram">Instagram</label>
+                                        <input wire:model="instagram" type="text" class="form-control"
+                                            id="instagram" placeholder="https://" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="youtube">Youtube</label>
+                                        <input wire:model="youtube" type="text" class="form-control"
+                                            id="youtube" placeholder="https://" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="facebook">Facebook</label>
+                                        <input wire:model="facebook" type="text" class="form-control"
+                                            id="facebook" placeholder="https://" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="twitter">Twitter</label>
+                                        <input wire:model="twitter" type="text" class="form-control"
+                                            id="twitter" placeholder="https://" />
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Simpan</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

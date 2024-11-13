@@ -18,7 +18,7 @@ class Setting extends Component
     protected $listeners = ['refresh' => '$refresh', 'editKategori' => 'editKategori', 'editJenis' => 'editJenis', 'deleteId' => 'deleteId', 'editKriteria' => 'editKriteria'];
     public $kategoriMode, $jenisMode, $icon, $kategori, $jenis_usaha, $modalTitle, $kategori_id, $jenis_usaha_id, $delete_id;
     public $slider1, $slider2, $slider3, $tabActive;
-    public $modal_max, $modal_min, $kriteria, $kriteria_id, $kriteriaMode, $user_id, $users, $deskripsi;
+    public $modal_max, $modal_min, $kriteria, $kriteria_id, $kriteriaMode, $user_id, $users, $deskripsi, $youtube, $facebook, $twitter, $instagram;
 
     public function mount()
     {
@@ -187,8 +187,53 @@ class Setting extends Component
     public function resetForm()
     {
         $this->reset(['kategoriMode', 'jenisMode', 'icon', 'kategori', 'jenis_usaha', 'modalTitle', 'kategori_id', 'jenis_usaha_id', 'delete_id']);
-        $this->reset(['kriteria', 'kriteria_id', 'modal_max', 'modal_min', 'kriteriaMode', 'deskripsi']);
+        $this->reset(['kriteria', 'kriteria_id', 'modal_max', 'modal_min', 'kriteriaMode', 'deskripsi', 'youtube', 'facebook', 'twitter', 'instagram']);
         $this->user_id = '';
+    }
+
+    public function storeSosmed()
+    {
+        $yt = ModelsSetting::where('name', 'youtube')->first();
+        $ig = ModelsSetting::where('name', 'instagram')->first();
+        $fb = ModelsSetting::where('name', 'facebook')->first();
+        $tt = ModelsSetting::where('name', 'twitter')->first();
+        if ($yt) {
+            $yt->value = $this->youtube;
+            $yt->update();
+        } else if (!$yt) {
+            ModelsSetting::create([
+                'name' => 'youtube',
+                'value' => $this->youtube,
+            ]);
+        }
+        if ($ig) {
+            $ig->value = $this->instagram;
+            $ig->update();
+        } else if (!$ig) {
+            ModelsSetting::create([
+                'name' => 'instagram',
+                'value' => $this->instagram,
+            ]);
+        }
+        if ($fb) {
+            $fb->value = $this->facebook;
+            $fb->update();
+        } else if (!$fb) {
+            ModelsSetting::create([
+                'name' => 'facebook',
+                'value' => $this->facebook,
+            ]);
+        }
+        if ($tt) {
+            $tt->value = $this->twitter;
+            $tt->update();
+        } else if (!$tt) {
+            ModelsSetting::create([
+                'name' => 'twitter',
+                'value' => $this->twitter,
+            ]);
+        }
+        $this->alert('success', 'Data berhasil disimpan!');
     }
 
     public function deleteId($id, $type)
