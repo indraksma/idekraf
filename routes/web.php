@@ -31,10 +31,11 @@ Route::middleware(['auth', 'role:admin|user|opd'])->group(function () {
     Route::get('admin/usaha', App\Http\Livewire\Admin\Usaha::class)->name('admin.usaha');
     Route::get('admin/produk', App\Http\Livewire\Admin\Produk::class)->name('admin.produk');
     Route::get('admin/account', App\Http\Livewire\Admin\ChangePassword::class)->name('admin.account');
+    Route::get('admin/usaha/export', [UsahaController::class, 'exportUsaha'])->name('export.usaha');
+    Route::get('admin/produk/export', [UsahaController::class, 'exportProduk'])->name('export.produk');
 });
 Route::middleware(['auth', 'role:admin|opd'])->group(function () {
     Route::get('admin/verusaha', App\Http\Livewire\Admin\VerUsaha::class)->name('admin.verusaha');
-    Route::get('admin/usaha/export', [UsahaController::class, 'exportUsaha'])->name('export.usaha');
 });
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/user', App\Http\Livewire\Admin\User::class)->name('admin.user');

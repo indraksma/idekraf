@@ -90,7 +90,7 @@
                             <div class="row">
                                 @foreach ($produk as $data)
                                     <div class="col-md-4">
-                                        <a class="btn btn-light mb-2 btn-block">
+                                        <a class="btn btn-light mb-2 btn-block" href="{{ url('produk/' . $data->id) }}">
                                             @if ($data->foto != null)
                                                 <img src="{{ asset('storage/img/' . $data->foto) }}" class="img-fluid"
                                                     style="max-height: 100px" />

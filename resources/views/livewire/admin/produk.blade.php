@@ -6,7 +6,17 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a class="text-teal" href="{{ route('admin') }}">Admin</a></li>
+                <li class="breadcrumb-item">
+                    <a class="text-teal" href="{{ route('admin') }}">
+                        @if (Auth::user()->hasRole('admin'))
+                            Admin
+                        @elseif(Auth::user()->hasRole('opd'))
+                            OPD
+                        @else
+                            User
+                        @endif
+                    </a>
+                </li>
                 <li class="breadcrumb-item active">Produk</li>
             </ol>
         </div><!-- /.col -->
@@ -23,6 +33,9 @@
         window.addEventListener('closeModalDelete', event => {
             $('#deleteModal').modal('hide');
         });
+        window.addEventListener('closeModalExport', event => {
+            $('#exportModal').modal('hide');
+        });
     </script>
 @endpush
 <div>
@@ -32,12 +45,14 @@
                 <div class="card card-teal card-outline">
                     <div class="card-body">
                         <div class="row">
-                            @if (Auth::user()->hasRole('user'))
-                                <div class="col-12">
+                            <div class="col-12">
+                                @if (Auth::user()->hasRole('user'))
                                     <button type="button" class="btn btn-success mb-3" data-toggle="modal"
                                         data-target="#produkModal" wire:click="addProduk()">Tambah Produk</button>
-                                </div>
-                            @endif
+                                @endif
+                                <button class="btn btn-primary mb-3 float-right" data-target="#exportModal"
+                                    data-toggle="modal">Export</button>
+                            </div>
                             <div class="col-12">
                                 <livewire:produk-table />
                             </div>
@@ -59,6 +74,41 @@
                 </div>
             </div>
         @endif
+    </div>
+
+    {{-- Modal Export --}}
+    <div wire:ignore.self class="modal fade" data-backdrop="static" id="exportModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Export Data Produk</h4>
+                    <button type="button" class="close" wire:click="resetForm" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="GET" action="{{ route('export.produk') }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="start_date">Tanggal Awal</label>
+                            <input type="date" wire:model="startDate" name="start_date" class="form-control"
+                                id="start_date" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="end_date">Tanggal Akhir</label>
+                            <input type="date" wire:model="endDate" name="end_date" class="form-control"
+                                id="end_date" required />
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="submit" class="btn btn-success">Export</button>
+                        <button type="button" class="btn btn-default" wire:click="resetForm"
+                            data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <!-- Modal Tambah Produk Bagi User -->
@@ -99,8 +149,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="harga">Harga</label>
-                                    <input wire:model.lazy="harga" type="int" class="form-control" id="harga"
-                                        placeholder="123456" required>
+                                    <input wire:model.lazy="harga" type="int" class="form-control"
+                                        id="harga" placeholder="123456" required>
                                 </div>
                             </div>
                             <div class="col-md-6">

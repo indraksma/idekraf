@@ -6,7 +6,15 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a class="text-teal" href="{{ route('admin') }}">Admin</a></li>
+                <li class="breadcrumb-item">
+                    <a class="text-teal" href="{{ route('admin') }}">
+                        @if (Auth::user()->hasRole('admin'))
+                            Admin
+                        @elseif(Auth::user()->hasRole('opd'))
+                            OPD
+                        @endif
+                    </a>
+                </li>
                 <li class="breadcrumb-item active">Ekraf</li>
             </ol>
         </div><!-- /.col -->

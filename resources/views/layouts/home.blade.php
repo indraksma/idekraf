@@ -78,11 +78,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                     href="#" class="nav-link text-white">Logout</a>
                             </li>
+                            @php
+                                if (Auth::user()->hasRole('admin')) {
+                                    $dashtext = 'Admin';
+                                } elseif (Auth::user()->hasRole('opd')) {
+                                    $dashtext = 'OPD';
+                                } else {
+                                    $dashtext = 'User';
+                                }
+                            @endphp
                             <li class="nav-item">
                                 <a href="{{ route('admin') }}" class="nav-link">
                                     <button class=" btn btn-warning btn-sm font-weight-bold"
                                         style="border-radius: 20px;">
-                                        Dashboard Admin
+                                        Dashboard {{ $dashtext }}
                                     </button>
                                 </a>
                             </li>

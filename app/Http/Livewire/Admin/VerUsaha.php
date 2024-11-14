@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Kriteria;
 use App\Models\Usaha;
+use Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -17,7 +18,16 @@ class VerUsaha extends Component
 
     public function render()
     {
-        $data = Usaha::where('isVerified', 0)->get();
+        if (Auth::user()->hasRole('opd')) {
+            $jenisusaha = JenisUsaha::where('user_id', Auth::user()->id)->get();
+            $juid = [];
+            foreach ($jenisusaha as $ju) {
+                array_push($juid, $ju->id);
+            }
+            $data = Usaha::where('isVerified', 0)->whereIn('jenis_usaha_id', $juid)->get();
+        } else {
+            $data = Usaha::where('isVerified', 0)->get();
+        }
         return view('livewire.admin.ver-usaha', ['data' => $data])->extends('layouts.app');
     }
 

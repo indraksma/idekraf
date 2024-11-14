@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProdukExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UsahasExport;
@@ -19,5 +20,18 @@ class UsahaController extends Controller
         $endDate = $request->input('end_date');
 
         return Excel::download(new UsahasExport($startDate, $endDate), 'data_ekraf_' . $startDate . '-' . $endDate . '.xlsx');
+    }
+
+    public function exportProduk(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        return Excel::download(new ProdukExport($startDate, $endDate), 'data_produk_' . $startDate . '-' . $endDate . '.xlsx');
     }
 }

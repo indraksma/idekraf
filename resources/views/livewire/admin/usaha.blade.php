@@ -6,7 +6,17 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a class="text-teal" href="{{ route('admin') }}">Admin</a></li>
+                <li class="breadcrumb-item">
+                    <a class="text-teal" href="{{ route('admin') }}">
+                        @if (Auth::user()->hasRole('admin'))
+                            Admin
+                        @elseif(Auth::user()->hasRole('opd'))
+                            OPD
+                        @else
+                            User
+                        @endif
+                    </a>
+                </li>
                 <li class="breadcrumb-item active">Ekraf</li>
             </ol>
         </div><!-- /.col -->
@@ -259,6 +269,23 @@
                                     </textarea>
                                     </div>
                                 </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="Kecamatan">Kecamatan</label>
+                                        <select wire:model="kecamatan_id" class="form-control" id="Kecamatan"
+                                            required>
+                                            <option value="">-- Pilih --</option>
+                                            @if ($kecamatan->isNotEmpty())
+                                                @foreach ($kecamatan as $kec)
+                                                    <option value="{{ $kec->id }}">
+                                                        {{ $kec->kecamatan }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        </textarea>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="Deskripsi">Deskripsi</label>
@@ -275,8 +302,8 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label for="kriteriaUmkm">Jenis UMKM <small>(Berdasarkan Modal
-                                                Usaha)</small></label>
+                                        <label for="kriteriaUmkm">Jenis UKM <small>(Berdasarkan Modal
+                                                Usaha dan atau Pendapatan)</small></label>
                                         <select wire:model="kriteria_id" class="form-control" id="kriteriaUmkm"
                                             required>
                                             <option value="">-- Pilih --</option>
@@ -288,6 +315,35 @@
                                                 @endforeach
                                             @endif
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nomorIndukBerusaha">Nomor Induk Berusaha (NIB)</label>
+                                        <input wire:model.lazy="nib" type="text" class="form-control"
+                                            id="nomorIndukBerusaha" placeholder="NIB">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="modalUsaha">Modal Usaha</label>
+                                        <input wire:model.lazy="modal_usaha" type="number" class="form-control"
+                                            id="modalUsaha" placeholder="Modal Usaha" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="omzetBulanan">Omzet Perbulan</label>
+                                        <input wire:model.lazy="omzet" type="number" class="form-control"
+                                            id="omzetBulanan" placeholder="Omzet Bulanan" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="Keterangan Tambahan">Keterangan Tambahan (PIRT, Sertifikat Halal,
+                                            BPOM, dsb) <small>(Opsional)</small></label>
+                                        <textarea wire:model.lazy="keterangan" class="form-control" id="Keterangan Tambahan" rows="3">
+                                    </textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -445,6 +501,33 @@
                                     <strong>Nomor HP</strong>
                                     <p class="text-muted mb-0">{{ $no_hp }}</p>
                                     <hr class="mb-1 mt-1">
+                                    <strong>NIB</strong>
+                                    <p class="text-muted mb-0">
+                                        @if ($nib != null)
+                                            {{ $nib }}
+                                        @else
+                                            -
+                                        @endif
+                                    </p>
+                                    <hr class="mb-1 mt-1">
+                                    <strong>Jumlah Pekerja</strong>
+                                    <p class="text-muted mb-0">
+                                        @if ($jumlah_pekerja != null)
+                                            {{ $jumlah_pekerja }}
+                                        @else
+                                            -
+                                        @endif
+                                    </p>
+                                    <hr class="mb-1 mt-1">
+                                    <strong>Modal Usaha</strong>
+                                    <p class="text-muted mb-0">
+                                        @if ($modal_usaha != null)
+                                            {{ $modal_usaha }}
+                                        @else
+                                            -
+                                        @endif
+                                    </p>
+                                    <hr class="mb-1 mt-1">
                                     <strong>Nomor Whatsapp Usaha</strong>
                                     <p class="text-muted mb-0">
                                         @if ($whatsapp != null)
@@ -500,6 +583,15 @@
                                     <hr class="mb-1 mt-1">
                                     <strong>Alamat</strong>
                                     <p class="text-muted mb-0">{{ $alamat }}</p>
+                                    <hr class="mb-1 mt-1">
+                                    <strong>Kecamatan</strong>
+                                    <p class="text-muted mb-0">
+                                        @if ($kecamatan_id != null)
+                                            {{ $namakecamatan }}
+                                        @else
+                                            -
+                                        @endif
+                                    </p>
                                 </div>
                                 <div class="col-md-6">
                                     <strong>Nama Pemilik</strong>
@@ -517,6 +609,15 @@
                                             {{ $link_maps }}
                                             <a target="_blank" class="ml-2 btn btn-xs btn-info"
                                                 href="{{ $link_maps }}">Buka</a>
+                                        @else
+                                            -
+                                        @endif
+                                    </p>
+                                    <hr class="mb-1 mt-1">
+                                    <strong>Omzet Perbulan</strong>
+                                    <p class="text-muted mb-0">
+                                        @if ($omzet != null)
+                                            {{ $omzet }}
                                         @else
                                             -
                                         @endif
@@ -568,6 +669,15 @@
                                     <hr class="mb-1 mt-1">
                                     <strong>Deskripsi</strong>
                                     <p class="text-muted">{{ $deskripsi }}</p>
+                                    <hr class="mb-1 mt-1">
+                                    <strong>Keterangan Tambahan</strong>
+                                    <p class="text-muted">
+                                        @if ($keterangan != null)
+                                            {{ $keterangan }}
+                                        @else
+                                            -
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
                             <button wire:click="resetForm" data-dismiss="modal"
@@ -839,6 +949,23 @@
                                     </textarea>
                                     </div>
                                 </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="Kecamatan">Kecamatan</label>
+                                        <select wire:model="kecamatan_id" class="form-control" id="Kecamatan"
+                                            required>
+                                            <option value="">-- Pilih --</option>
+                                            @if ($kecamatan->isNotEmpty())
+                                                @foreach ($kecamatan as $kec)
+                                                    <option value="{{ $kec->id }}">
+                                                        {{ $kec->kecamatan }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        </textarea>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="Deskripsi">Deskripsi</label>
@@ -848,15 +975,17 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="jumPekerja">Jumlah Pekerja</label>
+                                        <label for="jumPekerja">Jumlah Pekerja <span
+                                                class="badge badge-primary">*</span></label>
                                         <input wire:model.lazy="jumlah_pekerja" type="number" class="form-control"
                                             id="jumPekerja" placeholder="Jumlah Pekerja" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="kriteriaUmkm">Jenis UMKM <small>(Berdasarkan Modal
-                                                Usaha)</small></label>
+                                        <label for="kriteriaUmkm">Jenis UKM <small>(Berdasarkan Modal
+                                                Usaha dan atau Pendapatan)</small> <span
+                                                class="badge badge-primary">*</span></label>
                                         <select wire:model="kriteria_id" class="form-control" id="kriteriaUmkm"
                                             required>
                                             <option value="">-- Pilih --</option>
@@ -868,6 +997,39 @@
                                                 @endforeach
                                             @endif
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nomorIndukBerusaha">Nomor Induk Berusaha (NIB) <span
+                                                class="badge badge-primary">*</span></label>
+                                        <input wire:model.lazy="nib" type="text" class="form-control"
+                                            id="nomorIndukBerusaha" placeholder="NIB">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="modalUsaha">Modal Usaha <span
+                                                class="badge badge-primary">*</span></label>
+                                        <input wire:model.lazy="modal_usaha" type="number" class="form-control"
+                                            id="modalUsaha" placeholder="Modal Usaha" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="omzetBulanan">Omzet Perbulan <span
+                                                class="badge badge-primary">*</span></label>
+                                        <input wire:model.lazy="omzet" type="number" class="form-control"
+                                            id="omzetBulanan" placeholder="Omzet Bulanan" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="Keterangan Tambahan">Keterangan Tambahan (PIRT, Sertifikat Halal,
+                                            BPOM, dsb) <small>(Opsional)</small> <span
+                                                class="badge badge-primary">*</span></label>
+                                        <textarea wire:model.lazy="keterangan" class="form-control" id="Keterangan Tambahan" rows="3">
+                                    </textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -941,6 +1103,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <p>
+                                Keterangan :<br />
+                                <span class="badge badge-primary">*</span> : Tidak ditampilkan pada halaman utama.
+                            </p>
                             <hr>
                             <button type="submit" class="btn btn-success" wire:loading.attr="disabled"
                                 wire:target="logo">Simpan</button>

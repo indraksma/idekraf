@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Imports\UsahaImport;
 use App\Models\JenisUsaha;
 use App\Models\Kategori;
+use App\Models\Kecamatan;
 use App\Models\Kriteria;
 use App\Models\Produk;
 use App\Models\Usaha as ModelsUsaha;
@@ -26,12 +27,14 @@ class Usaha extends Component
     public $nama_produk, $harga, $foto_produk, $tipe_produk, $deskripsi_produk, $ekspor;
     public $usaha_id, $nama_usaha, $kategori, $kategori_id, $jenis_usaha, $jenis_usaha_id, $user, $modalTitle, $deskripsi, $alamat, $website, $link_maps, $logo, $name, $email, $no_hp, $password, $editMode, $delete_id, $filelogo, $nama_kategori, $nama_jenis;
     public $instagram, $tiktok, $facebook, $twitter, $shopee, $tokopedia, $kriteria_id, $kriteria, $jumlah_pekerja, $whatsapp, $youtube, $file_import, $startDate, $endDate;
+    public $modal_usaha, $omzet, $keterangan, $kecamatan_id, $nib, $kecamatan, $namakecamatan;
     public $detailMode = false;
     public function mount()
     {
         $this->kategori = Kategori::all();
         $this->jenis_usaha = JenisUsaha::orderBy('jenis_usaha', 'ASC')->get();
         $this->kriteria = Kriteria::all();
+        $this->kecamatan = Kecamatan::orderBy('kecamatan', 'ASC')->get();
 
         if (Auth::user()->hasRole('user')) {
             $countusaha = ModelsUsaha::where('user_id', Auth::user()->id)->count();
@@ -59,6 +62,11 @@ class Usaha extends Component
                 $this->kriteria_id = $usaha->kriteria_id;
                 $this->whatsapp = $usaha->whatsapp;
                 $this->youtube = $usaha->youtube;
+                $this->modal_usaha = $usaha->modal_usaha;
+                $this->omzet = $usaha->omzet;
+                $this->keterangan = $usaha->keterangan;
+                $this->kecamatan_id = $usaha->kecamatan_id;
+                $this->nib = $usaha->nib;
             }
         }
     }
@@ -120,6 +128,11 @@ class Usaha extends Component
         $this->filelogo = $ekraf->logo;
         $this->whatsapp = $ekraf->whatsapp;
         $this->youtube = $ekraf->youtube;
+        $this->modal_usaha = $ekraf->modal_usaha;
+        $this->omzet = $ekraf->omzet;
+        $this->kecamatan_id = $ekraf->kecamatan_id;
+        $this->nib = $ekraf->nib;
+        $this->keterangan = $ekraf->keterangan;
     }
 
     public function detailEkraf($id)
@@ -147,6 +160,14 @@ class Usaha extends Component
         $this->kriteria_id = $ekraf->kriteria_id;
         $this->whatsapp = $ekraf->whatsapp;
         $this->youtube = $ekraf->youtube;
+        $this->modal_usaha = $ekraf->modal_usaha;
+        $this->omzet = $ekraf->omzet;
+        $this->kecamatan_id = $ekraf->kecamatan_id;
+        $this->nib = $ekraf->nib;
+        $this->keterangan = $ekraf->keterangan;
+        if ($ekraf->kecamatan_id != NULL) {
+            $this->namakecamatan = Kecamatan::where('id', $ekraf->kecamatan_id)->first();
+        }
     }
 
     public function updatedLogo()
@@ -161,8 +182,9 @@ class Usaha extends Component
     {
         $this->reset(['nama_produk', 'tipe_produk', 'foto_produk', 'deskripsi_produk', 'harga', 'ekspor']);
         $this->reset(['nama_kategori', 'nama_jenis', 'usaha_id', 'nama_usaha', 'kategori_id', 'jenis_usaha_id', 'user', 'modalTitle', 'deskripsi', 'alamat', 'website', 'link_maps', 'logo', 'filelogo', 'name', 'email', 'no_hp', 'password', 'editMode', 'delete_id']);
-        $this->reset(['instagram', 'facebook', 'twitter', 'tiktok', 'shopee', 'tokopedia', 'jumlah_pekerja', 'whatsapp', 'youtube', 'file_import', 'startDate', 'endDate']);
+        $this->reset(['instagram', 'facebook', 'twitter', 'tiktok', 'shopee', 'tokopedia', 'jumlah_pekerja', 'whatsapp', 'youtube', 'file_import', 'startDate', 'endDate', 'modal_usaha', 'omzet', 'nib', 'keterangan', 'namakecamatan']);
         $this->kriteria_id = '';
+        $this->kecamatan_id = '';
         $this->kategori_id = '';
         $this->jenis_usaha_id = '';
         $this->detailMode = false;
@@ -226,6 +248,11 @@ class Usaha extends Component
             'link_maps' => $this->link_maps,
             'youtube' => $this->youtube,
             'whatsapp' => $this->whatsapp,
+            'nib' => $this->nib,
+            'omzet' => $this->omzet,
+            'modal_usaha' => $this->modal_usaha,
+            'keterangan' => $this->keterangan,
+            'kecamatan_id' => $this->kecamatan_id,
             'logo' => $filename,
             'isVerified' => $verify,
         ]);
@@ -272,6 +299,11 @@ class Usaha extends Component
             $this->kriteria_id = $usaha->kriteria_id;
             $this->whatsapp = $usaha->whatsapp;
             $this->youtube = $usaha->youtube;
+            $this->modal_usaha = $usaha->modal_usaha;
+            $this->omzet = $usaha->omzet;
+            $this->keterangan = $usaha->keterangan;
+            $this->kecamatan_id = $usaha->kecamatan_id;
+            $this->nib = $usaha->nib;
         }
     }
 

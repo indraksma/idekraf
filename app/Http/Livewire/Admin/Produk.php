@@ -15,6 +15,7 @@ class Produk extends Component
     use LivewireAlert, WithFileUploads;
     protected $listeners = ['editProduk' => 'editProduk', 'deleteId' => 'deleteId', 'detailProduk' => 'detailProduk'];
     public $produk_id, $delete_id, $nama_produk, $harga, $foto_produk, $tipe_produk, $deskripsi_produk, $ekspor, $editMode, $nama_usaha, $fileProduk, $usaha_id;
+    public $startDate, $endDate;
     public $detailMode = false;
     public function render()
     {
@@ -75,7 +76,7 @@ class Produk extends Component
 
     public function resetForm()
     {
-        $this->reset(['nama_produk', 'tipe_produk', 'foto_produk', 'deskripsi_produk', 'harga', 'ekspor', 'delete_id', 'editMode', 'nama_usaha', 'fileProduk', 'produk_id']);
+        $this->reset(['nama_produk', 'tipe_produk', 'foto_produk', 'deskripsi_produk', 'harga', 'ekspor', 'delete_id', 'editMode', 'nama_usaha', 'fileProduk', 'produk_id', 'startDate', 'endDate']);
         $this->ekspor = '';
         $this->detailMode = false;
     }

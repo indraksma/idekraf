@@ -19,6 +19,7 @@ namespace App\Models{
  * @property string $jenis_usaha
  * @property string|null $icon
  * @property int|null $user_id
+ * @property string|null $deskripsi
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Usaha> $usaha
@@ -28,6 +29,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha query()
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha whereDeskripsi($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha whereIcon($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JenisUsaha whereJenisUsaha($value)
@@ -58,6 +60,25 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Kategori whereUpdatedAt($value)
  */
 	class Kategori extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Kecamatan
+ *
+ * @property int $id
+ * @property string $kecamatan
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Kecamatan newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Kecamatan newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Kecamatan query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Kecamatan whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Kecamatan whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Kecamatan whereKecamatan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Kecamatan whereUpdatedAt($value)
+ */
+	class Kecamatan extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -142,21 +163,36 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $user_id
+ * @property int|null $kriteria_id
  * @property int $kategori_id
  * @property int $jenis_usaha_id
+ * @property int|null $kecamatan_id
  * @property string $nama_usaha
  * @property string $alamat
  * @property string $deskripsi
  * @property string|null $website
+ * @property string|null $whatsapp
+ * @property string|null $instagram
+ * @property string|null $tiktok
+ * @property string|null $youtube
+ * @property string|null $facebook
+ * @property string|null $twitter
+ * @property string|null $shopee
+ * @property string|null $tokopedia
  * @property string|null $link_maps
  * @property string|null $logo
  * @property int $isVerified
  * @property int|null $modal_usaha
  * @property int|null $jumlah_pekerja
+ * @property string|null $nib
+ * @property string|null $omzet
+ * @property string|null $keterangan
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\JenisUsaha|null $jenis_usaha
  * @property-read \App\Models\Kategori|null $kategori
+ * @property-read \App\Models\Kecamatan|null $kecamatan
+ * @property-read \App\Models\Kriteria|null $kriteria
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Produk> $produk
  * @property-read int|null $produk_count
  * @property-read \App\Models\User|null $user
@@ -166,18 +202,31 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereAlamat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereDeskripsi($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereFacebook($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereInstagram($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereIsVerified($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereJenisUsahaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereJumlahPekerja($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereKategoriId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereKecamatanId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereKeterangan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereKriteriaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereLinkMaps($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereLogo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereModalUsaha($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereNamaUsaha($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereNib($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereOmzet($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereShopee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereTiktok($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereTokopedia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereTwitter($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereWebsite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereWhatsapp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Usaha whereYoutube($value)
  */
 	class Usaha extends \Eloquent {}
 }

@@ -30,4 +30,14 @@ class Usaha extends Model
     {
         return $this->hasMany(Produk::class);
     }
+
+    public function kriteria()
+    {
+        return $this->belongsTo(Kriteria::class);
+    }
+
+    public function kecamatan()
+    {
+        return $this->belongsTo(Kecamatan::class);
+    }
 }
