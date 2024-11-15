@@ -33,7 +33,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-success">
             <div class="card-header text-center">
-                <img src="{{ asset('logo.png') }}" class="img-fluid" style="max-width: 50px" />
+                <img src="{{ asset('logo_idekraf.png') }}" class="img-fluid" style="max-width: 50px" />
                 <br />
                 <a href="{{ route('home') }}" class="h2"><b>{{ config('app.name') }}</b></a>
                 <br />
