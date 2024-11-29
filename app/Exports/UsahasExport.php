@@ -57,7 +57,7 @@ class UsahasExport implements FromCollection, WithHeadings, WithMapping, WithCus
             'JUMLAH PEKERJA',
             'MODAL USAHA',
             'OMZET BULANAN',
-            'KLASIFIKASI UMKM',
+            'KLASIFIKASI UKM',
             'WEBSITE',
             'WHATSAPP',
             'INSTAGRAM',

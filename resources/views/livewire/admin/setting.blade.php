@@ -48,7 +48,7 @@
                                 href="#jenis" data-toggle="tab" wire:click.prevent="changeTab('2')">Sektor Usaha</a>
                         </li>
                         <li class="nav-item"><a class="nav-link @if ($tabActive == 4) active @endif"
-                                href="#kriteria" data-toggle="tab" wire:click.prevent="changeTab('4')">Kriteria UMKM</a>
+                                href="#kriteria" data-toggle="tab" wire:click.prevent="changeTab('4')">Kriteria UKM</a>
                         </li>
                         <li class="nav-item"><a class="nav-link @if ($tabActive == 3) active @endif"
                                 href="#slider" data-toggle="tab" wire:click.prevent="changeTab('3')">Gambar Slider</a>
@@ -116,7 +116,7 @@
                         <div class="tab-pane @if ($tabActive == 4) active @endif" id="kriteria">
                             <button class="btn btn-sm btn-success m-2" wire:click="addKriteria"
                                 data-target="#modalKriteria" data-toggle="modal"><i class="fas fa-plus"></i>&nbsp;Tambah
-                                Kriteria UMKM</button>
+                                Kriteria UKM</button>
                             <livewire:admin.kriteria-umkm />
                         </div>
                         <div class="tab-pane @if ($tabActive == 5) active @endif" id="sosmed">

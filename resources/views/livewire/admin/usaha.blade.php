@@ -833,7 +833,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="kriteriaUmkm">Jenis UMKM <small>(Berdasarkan Modal
+                                        <label for="kriteriaUmkm">Jenis UKM <small>(Berdasarkan Modal
                                                 Usaha)</small></label>
                                         <select wire:model="kriteria_id" class="form-control" id="kriteriaUmkm"
                                             required>
