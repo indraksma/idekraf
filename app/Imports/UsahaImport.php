@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\Kecamatan;
 use App\Models\Usaha;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +26,7 @@ class UsahaImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
+        $kecamatan_id = Kecamatan::where('kecamatan', 'LIKE', '%' . $row['kecamatan' . '%'])->first()->id;
         $user = User::create([
             'name' => $row['nama_pemilik'],
             'email' => $row['email'],
@@ -35,6 +37,7 @@ class UsahaImport implements ToModel, WithHeadingRow
             'kriteria_id' => $this->kriteria_id,
             'kategori_id' => $this->kategori_id,
             'jenis_usaha_id' => $this->jenis_usaha_id,
+            'kecamatan_id' => $kecamatan_id,
             'user_id' => $user->id,
             'nama_usaha' => $row['nama_usaha'],
             'alamat' => $row['alamat'],
@@ -50,6 +53,8 @@ class UsahaImport implements ToModel, WithHeadingRow
             'tokopedia' => $row['tokopedia'],
             'link_maps' => $row['link_maps'],
             'jumlah_pekerja' => $row['jumlah_pekerja'],
+            'modal_usaha' => $row['modal_usaha'],
+            'omzet' => $row['omzet'],
             'isVerified' => 1,
         ]);
     }

@@ -587,7 +587,7 @@
                                     <strong>Kecamatan</strong>
                                     <p class="text-muted mb-0">
                                         @if ($kecamatan_id != null)
-                                            {{ $namakecamatan }}
+                                            {{ $namakecamatan->kecamatan }}
                                         @else
                                             -
                                         @endif
