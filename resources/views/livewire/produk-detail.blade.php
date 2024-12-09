@@ -14,8 +14,13 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-sm-6">
-                                <img src="{{ asset('storage/img/' . $produk->foto) }}" class="product-image"
-                                    alt="Product Image">
+                                @if ($produk->foto == null)
+                                    <img src="{{ asset('img/default_product.png') }}" class="product-image"
+                                        alt="Product Image">
+                                @else
+                                    <img src="{{ asset('storage/img/' . $produk->foto) }}" class="product-image"
+                                        alt="Product Image">
+                                @endif
                             </div>
                             <div class="col-12 col-sm-6" bis_skin_checked="1">
                                 <h3 class="my-3">{{ $produk->nama_produk }}</h3>
