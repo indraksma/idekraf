@@ -26,7 +26,7 @@ class UsahaImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        $kecamatan_id = Kecamatan::where('kecamatan', 'LIKE', '%' . $row['kecamatan' . '%'])->first()->id;
+        $kecamatan_id = Kecamatan::where('kecamatan', 'LIKE', '%' . $row['kecamatan'] . '%')->first()->id;
         $user = User::create([
             'name' => $row['nama_pemilik'],
             'email' => $row['email'],
