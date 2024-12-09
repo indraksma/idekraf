@@ -346,7 +346,8 @@ class Usaha extends Component
         Storage::disk('public')->delete($file_path);
 
         $this->resetForm();
-        $this->emit('closeModalImport');
+        $this->emit('refreshUsahaTable');
+        $this->dispatchBrowserEvent('closeModalImport');
         $this->alert('success', 'Data berhasil diimport!', [
             'position' => 'center',
             'timer' => 3000,
